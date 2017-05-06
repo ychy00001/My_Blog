@@ -17,6 +17,7 @@ class IndexController extends BaseController{
 	 * @return   null
 	 */
 	public function index(){
+		$this->denyAccess();
 		$this->smarty->display("index.html");
 	}
 
@@ -27,6 +28,7 @@ class IndexController extends BaseController{
 	 * @return   null
 	 */
 	public function top(){
+		$this->denyAccess();
 		$this->smarty->display("top.html");
 	}
 
@@ -37,6 +39,7 @@ class IndexController extends BaseController{
 	 * @return   null
 	 */
 	public function left(){
+		$this->denyAccess();
 		$this->smarty->display("left.html");
 	}
 
@@ -47,6 +50,7 @@ class IndexController extends BaseController{
 	 * @return   null
 	 */
 	public function main(){
+		$this->denyAccess();
 		$this->smarty->display("main.html");
 	}
 
@@ -57,6 +61,7 @@ class IndexController extends BaseController{
 	 * @return   null
 	 */
 	public function center(){
+		$this->denyAccess();
 		$this->smarty->display("center.html");
 	}
 

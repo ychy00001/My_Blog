@@ -99,5 +99,24 @@ final class UserModel extends BaseModel{
 		$sql = "UPDATE {$this->table} set {$str} WHERE id={$id}";
 		return $this->pdo->exec($sql);
 	}
+
+	/**
+	 * 用户登陆时的更新操作
+	 * @Author   Rain
+	 * @DateTime 2017-05-06
+	 * @param    [type]     $data [description]
+	 * @param    [type]     $id   [description]
+	 * @return   [type]           [description]
+	 */
+	public function loginUpdate($data,$id){
+		$str = "";
+		foreach ($data as $key => $value) {
+			$str .= "{$key}='$value',";
+		}
+		$str .= "login_times=login_times+1";
+
+		$sql = "UPDATE {$this->table} set {$str} WHERE id={$id}";
+		return $this->pdo->exec($sql);
+	}
 }
  ?>

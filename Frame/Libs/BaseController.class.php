@@ -45,10 +45,27 @@ abstract class BaseController{
 	 * @param    integer    $time [等待秒数]
 	 * @return   null
 	 */
-	protected function jump($msg,$url,$time=2){
-		echo "<h2>$msg</h2>";
-		header("refresh:$time;url=$url");
+	protected function jump($msg,$url,$time=3){
+		$this->smarty->assign(array(
+			'message' => $msg,
+			'time' => $time,
+			'url' => $url,
+			));
+		$this->smarty->display("../Public/jump.html");
 		exit();
+	}
+
+	/**
+	 * 拒绝访问的方法
+	 * @Author   Rain
+	 * @DateTime 2017-05-06
+	 * @return   null
+	 */
+	protected function denyAccess(){
+		if(!isset($_SESSION['username'])){
+			//跳转至登陆界面
+			$this->jump("请登陆!","?c=User&a=login");
+		}
 	}
 }
 

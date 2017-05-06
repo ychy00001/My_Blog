@@ -30,7 +30,8 @@ final class Frame{
 	 * @return   null
 	 */
 	private static function initCharset(){
-		header("Content-type:text/html;charset=utf-8");;
+		header("Content-type:text/html;charset=utf-8");
+		session_start();
 	}
 
 	/**
