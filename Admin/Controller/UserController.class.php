@@ -90,7 +90,7 @@ final class UserController extends BaseController{
 	public function edit(){
 		$this->denyAccess();
 		$id = $_GET['id'];
-		$user = UserModel::getInstance()->fetchOne($id);
+		$user = UserModel::getInstance()->fetchOne("id='$id'");
 		$this->smarty->assign("user",$user);
 		$this->smarty->display("Edit.html");
 	}

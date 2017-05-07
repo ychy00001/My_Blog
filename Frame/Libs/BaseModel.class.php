@@ -38,6 +38,19 @@ abstract class BaseModel{
 	}
 
 	/*************数据库操作*****************/
+
+	/**
+	 * 获取一行模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [integer]     $id [模型编号]
+	 * @return   [array]         [模型数据关联数组]
+	 */
+	public function fetchOne($where="2>1"){
+		$sql = "SELECT * FROM {$this->table} where {$where} LIMIT 1";
+		return $this->pdo->fetchOne($sql);
+	}
+
 	/**
 	 * 获取所有模型数据
 	 * @Author   Rain
@@ -45,7 +58,7 @@ abstract class BaseModel{
 	 * @return   [Array]     [返回所有用户信息]
 	 */
 	public function fetchAll(){
-		$sql = "SELECT * FROM {$this->table}";
+		$sql = "SELECT * FROM {$this->table} LIMIT 15";
 		return $this->pdo->fetchAll($sql);
 	}
 
@@ -92,18 +105,6 @@ abstract class BaseModel{
 	public function rowCount($where){
 		$sql = "SELECT * FROM {$this->table} WHERE $where";
 		return $this->pdo->rowCount($sql);
-	}
-
-	/**
-	 * 获取一行模型数据
-	 * @Author   Rain
-	 * @DateTime 2017-05-05
-	 * @param    [integer]     $id [模型编号]
-	 * @return   [array]         [模型数据关联数组]
-	 */
-	public function fetchOne($id){
-		$sql = "SELECT * FROM {$this->table} where id = {$id}";
-		return $this->pdo->fetchOne($sql);
 	}
 
 	/**

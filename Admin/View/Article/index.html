@@ -37,14 +37,22 @@ function confirmDel(id)
 	<select name="category_id">
 		<option value="">任意</option>
 		<{foreach $categorys as $category}>
-		<option value="<{$category.id}>">
-			<{str_repeat('--',$category.level*4)}>
+		<option value="<{$category.id}>"
+		<{if !empty($smarty.request.category_id) and $smarty.request.category_id eq $category['id']}>
+			selected
+		<{/if}>
+		>
+			<{str_repeat('-',$category.level*4)}>
 			<{$category.classname}>
 		</option>
 		<{/foreach}>
 	</select>
 	<span style="padding:0px 5px;">标题</span>
-	<input type="text" name="keyword" />
+	<input type="text" name="keyword" 
+	<{if !empty($smarty.request.keyword)}>
+		value="<{$smarty.request.keyword}>"
+	<{/if}>
+	/>
 	<input type="submit" value="搜索" />
 	<input type="hidden" name="ac" value="search" />
 </form>

@@ -71,6 +71,18 @@ abstract class BaseController{
 			$this->jump("请登陆!","?c=User&a=login");
 		}
 	}
+
+	/**
+	 * 打印数组方法
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 * @param    [array]     $arr [需要打印的数组]
+	 */
+	protected function printArr($arr){
+		echo "<pre>";
+		print_r($arr);
+		echo "<pre>";
+	}
 }
 
  ?>

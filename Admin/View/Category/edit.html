@@ -37,8 +37,11 @@
 			<select name="pid">
 				<option value="0">无</option>
 				<{foreach $categorys as $category}>
-				<option value="<{$category.id}>"<{if $category.id eq $arr.pid}> selected='selected'<{/if}>>
-					<{str_repeat('--',$category.level*4)}>
+				<option value="<{$category.id}>"
+					<{if $category.id eq $arr.pid}> 
+						selected='selected'
+					<{/if}>>
+					<{str_repeat('-',$category.level*4)}>
 					<{$category.classname}>
 				</option>
 				<{/foreach}>

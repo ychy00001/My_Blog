@@ -73,8 +73,10 @@ final class CategoryController extends BaseController {
 	public function edit(){
 		$id = $_GET["id"];
 		$this->denyAccess();
-		$category = CategoryModel::getInstance()->fetchOne($id);
-		$this->smarty->assign("category",$category);
+		$arr = CategoryModel::getInstance()->fetchOne("id='$id'");
+		$categorys = CategoryModel::getInstance()->categoryLists(CategoryModel::getInstance()->fetchAll());
+		$this->smarty->assign("categorys",$categorys);
+		$this->smarty->assign("arr",$arr);
 		$this->smarty->display("edit.html");
 	}
 
