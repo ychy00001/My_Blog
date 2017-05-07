@@ -59,7 +59,7 @@ function checkForm()
 				<option value="0">无</option>
 				<{foreach $categorys as $category}>
 				<option value="<{$category.id}>">
-					<{str_repeat('--',$category.level*4)}>
+					<{str_repeat('-',$category.level*4)}>
 					<{$category.classname}>
 				</option>
 				<{/foreach}>

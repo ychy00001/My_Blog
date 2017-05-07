@@ -5,6 +5,7 @@
  * Author       : Rain
  * ========================
  */
+
 namespace Admin\Controller;
 
 use \Frame\Libs\BaseController;
@@ -16,7 +17,6 @@ final class UserController extends BaseController{
 	 * 后台默认用户管理页面显示方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   null
 	 */
 	public function index(){
 		$this->denyAccess();
@@ -31,7 +31,6 @@ final class UserController extends BaseController{
 	 * 删除后台用户信息方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return  null
 	 */
 	public function delete(){
 		$this->denyAccess();
@@ -59,7 +58,6 @@ final class UserController extends BaseController{
 	 * 插入后台用户数据 请求处理方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   null
 	 */
 	public function insert(){
 		$this->denyAccess();
@@ -88,7 +86,6 @@ final class UserController extends BaseController{
 	 * 后台编辑用户数据请求
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   [type]     [description]
 	 */
 	public function edit(){
 		$this->denyAccess();
@@ -102,7 +99,6 @@ final class UserController extends BaseController{
 	 * 后台用户数据更新方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   null
 	 */
 	public function update(){
 		$this->denyAccess();
@@ -124,7 +120,6 @@ final class UserController extends BaseController{
 	 * 后台管理用户登陆方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	public function login(){
 		//调用登陆的视图文件
@@ -135,7 +130,6 @@ final class UserController extends BaseController{
 	 * 点击登陆后检测可否登陆
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	public function loginCheck(){
 		//获取表单提交值
@@ -168,7 +162,6 @@ final class UserController extends BaseController{
 	 * 获取验证码方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	public function captcha(){
 		$c = new \Frame\Vendor\Captcha();
@@ -179,7 +172,6 @@ final class UserController extends BaseController{
 	 * 退出登录
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	public function logout(){
 		unset($_SESSION['uid']);

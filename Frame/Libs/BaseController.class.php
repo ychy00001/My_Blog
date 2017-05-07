@@ -1,4 +1,11 @@
 <?php 
+/**
+ * ========================
+ * Description  : description
+ * Author       : Rain
+ * ========================
+ */
+
 namespace Frame\Libs;
 use \Frame\Vendor\Smarty;
 
@@ -19,7 +26,6 @@ abstract class BaseController{
 	 * 初始化Smarty 配置Smarty的基本属性
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   null
 	 */
 	protected function initSmarty(){
 		$smarty = new Smarty();
@@ -43,7 +49,6 @@ abstract class BaseController{
 	 * @param    [String]     $msg  [提示信息]
 	 * @param    [String]     $url  [跳转连接]
 	 * @param    integer    $time [等待秒数]
-	 * @return   null
 	 */
 	protected function jump($msg,$url,$time=3){
 		$this->smarty->assign(array(
@@ -59,7 +64,6 @@ abstract class BaseController{
 	 * 拒绝访问的方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	protected function denyAccess(){
 		if(!isset($_SESSION['username'])){

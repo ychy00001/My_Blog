@@ -1,14 +1,15 @@
 <?php 
-namespace Frame\Vendor;
-use \PDO;
-use \PDOException;
-
 /**
  * ========================
  * Description  : POD封装类
  * Author       : Rain
  * ========================
  */
+
+namespace Frame\Vendor;
+use \PDO;
+use \PDOException;
+
 final class PDOWrapper{
 	//数据库配置信息
 	private $db_type;

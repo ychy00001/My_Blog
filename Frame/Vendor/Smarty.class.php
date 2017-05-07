@@ -6,7 +6,7 @@
  * ========================
  */
 namespace Frame\Vendor;
-
+//引入smarty框架
 require_once(FRAME_PATH."Vendor".DS."Smarty".DS."libs".DS."Smarty.class.php");
 
 final class Smarty extends \Smarty{}

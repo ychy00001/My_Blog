@@ -5,6 +5,7 @@
  * Author       : Rain
  * ========================
  */
+
 namespace Admin\Model;
 
 use \Frame\Libs\BaseModel;

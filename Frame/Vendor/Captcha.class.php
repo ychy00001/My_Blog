@@ -5,6 +5,7 @@
  * Author       : Rain
  * ========================
  */
+
 namespace Frame\Vendor;
 
 final class Captcha{
@@ -85,7 +86,6 @@ final class Captcha{
 	 * 背景图添加文字信息
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
 	 */
 	private function createText(){
 		$color = imagecolorallocate($this->img, mt_rand(0,250), mt_rand(0,250), mt_rand(0,250));
@@ -97,7 +97,6 @@ final class Captcha{
 	 * 输出图片
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   [type]     [description]
 	 */
 	private function outPut(){
 		header("content-type:image/png");
@@ -109,7 +108,7 @@ final class Captcha{
 	 * 获取验证码
 	 * @Author   Rain
 	 * @DateTime 2017-05-06
-	 * @return   null
+	 * @return   返回统一小写验证码
 	 */
 	public function getCode(){
 		//验证码全小写

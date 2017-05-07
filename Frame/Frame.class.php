@@ -12,7 +12,6 @@ final class Frame{
 	 * 框架主要执行方法 index.php请求时调用
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	public static function run(){
 		self::initCharset();//网页字符集
@@ -27,7 +26,6 @@ final class Frame{
 	 * 设置网页字符集
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	private static function initCharset(){
 		header("Content-type:text/html;charset=utf-8");
@@ -38,7 +36,6 @@ final class Frame{
 	 * 初始化配置文件
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	private static function initConfig(){
 		$GLOBALS['config'] = require_once(APP_PATH."Conf".DS."Config.php");
@@ -48,7 +45,6 @@ final class Frame{
 	 * 初始化路由参数  从url中获取要执行的方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	private static function initRoute(){
 		$p = $GLOBALS['config']['default_platform'];
@@ -63,7 +59,6 @@ final class Frame{
 	 * 初始化常量
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return  null
 	 */
 	private static function initConst(){
 		//定义当前视图路径
@@ -76,7 +71,6 @@ final class Frame{
 	 * 类的自动加载
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	private static function initAutoLoad(){
 		spl_autoload_register(function ($className){
@@ -90,7 +84,6 @@ final class Frame{
 	 * 请求分发 创建控制器对象 调用控制器对象的方法
 	 * @Author   Rain
 	 * @DateTime 2017-05-04
-	 * @return   null
 	 */
 	private static function initDispatch(){
 		$c = "\\".PLAT."\\"."Controller"."\\".CONTROLLER."Controller";

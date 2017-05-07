@@ -6,13 +6,17 @@
  * ========================
  */
 
-
 namespace Admin\Controller;
 use \Frame\Libs\BaseController;
 use \Admin\Model\CategoryModel;
 
 final class CategoryController extends BaseController {
 
+	/**
+	 * 文章分类首页
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 */
 	public function index(){
 		$this->denyAccess();
 		$categorys = CategoryModel::getInstance()->fetchAll();
@@ -22,11 +26,23 @@ final class CategoryController extends BaseController {
 		$this->smarty->display("index.html");
 	}
 
+	/**
+	 * 文章分类添加
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 */
 	public function add(){
 		$this->denyAccess();
+		$categorys = CategoryModel::getInstance()->categoryLists(CategoryModel::getInstance()->fetchAll());
+		$this->smarty->assign("categorys",$categorys);
 		$this->smarty->display("add.html");
 	}
 
+	/**
+	 * 插入文章分类
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 */
 	public function insert(){
 		$this->denyAccess();
 		$data['classname'] = $_POST['classname'];
@@ -36,6 +52,11 @@ final class CategoryController extends BaseController {
 		$this->jump("文章分类添加成功","?c=Category");
 	}
 
+	/**
+	 * 删除文章分类
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 */
 	public function delete(){
 		$this->denyAccess();
 		$id = $_GET["id"];
@@ -43,6 +64,12 @@ final class CategoryController extends BaseController {
 		$this->jump("文章分类删除成功","?c=Category");
 	}
 
+	/**
+	 * 编辑文章分类
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 * @return   [type]     [description]
+	 */
 	public function edit(){
 		$id = $_GET["id"];
 		$this->denyAccess();
@@ -51,6 +78,11 @@ final class CategoryController extends BaseController {
 		$this->smarty->display("edit.html");
 	}
 
+	/**
+	 * 更新文章分类
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 */
 	public function update(){
 		$this->denyAccess();
 		$id = $_POST['id'];
