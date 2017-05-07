@@ -16,7 +16,7 @@ class IndexController{
 	 * @return   null
 	 */
 	public function index(){
-		$modeObj = new IndexModel();
+		$modeObj = IndexModel::getInstance();
 		$arrs = $modeObj->fetchAll();
 		include VIEW_PATH."index.html";
 	}

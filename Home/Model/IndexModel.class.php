@@ -10,10 +10,7 @@ use \Frame\Libs\BaseModel;
  */
 final class IndexModel extends BaseModel{
 
-	public function fetchAll(){
-		$sql = "SELECT * FROM user ORDER BY id DESC";
-		return $this->pdo->fetchAll($sql);
-	}
+	protected $table = "user";
 }
 
  ?>
