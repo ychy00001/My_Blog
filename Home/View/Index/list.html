@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link href="./Public/Home/Css/public.css" rel="stylesheet" type="text/css">
-<title>博客首页</title>
+<link href="./Public/Home/css/public.css" rel="stylesheet" type="text/css">
+<title>博文列表页</title>
 </head>
 
 <body>
@@ -36,8 +36,8 @@
 		</div>
 		<div class="menu">
 			<ul>
-				<li><a href="?c=Index" class="current">首页</a></li>
-				<li><a href="?c=Index&a=showList">博文目录</a></li>
+				<li><a href="?c=Index">首页</a></li>
+				<li><a href="?c=Index&a=showList" class="current">博文目录</a></li>
 				<li><a href="javascript:void(0)">图片</a></li>
 				<li><a href="javascript:void(0)" class="noLine">关于我</a></li>
 			</ul>
@@ -49,29 +49,22 @@
 <div class="contains">
 <!--左边栏-->
 <div class="left">
-	<div class="toptitle">博文</div>
+	<div class="toptitle">博文列表</div>
 	<!--博文简介-->
-	<{foreach $articles as $article}>
-	<div class="block">
-		<div class="title">
-			<a target="_black" href="?c=Index&a=content&id=<{$article.id}>" target="_black"><{$article.title}></a>
-			<span>(<{$article['addate']|date_format:'%Y-%m-%d- %H:%M:%S'}>)</span>
-		</div>
-		<div class="content">
-			<{$article.content}>
-		</div>
-		<div class="bottom">
-			<span><{$article.name}> | <{$article.classname}> | 阅读:<{$article.read}> | 点赞:<{$article.praise}> | 评论:<{$article.comment_count}></span>
-			<a href="?c=Index&a=content&id=<{$article.id}>" target="_black">查看全文>></a>
-		</div>
-	</div><!--//博文简介-->
-	<{/foreach}>
+	<div class="bloglist">
+		<ul>
+			<{foreach $articles as $article}>
+			<li><a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a><span><span class="span1">(<{$article.comment_count}>/<{$article.read}>)</span> <{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span></li>
+			<{/foreach}>
+		</ul>
+	</div><!--//博文列表-->
+
 	<!--分页代码-->
 	<div class="pagelist">
 		<{$pageStr}>
 		<span>
 			<form name="form2" method="post" action="">
-				<input type="text" name="page" value="2">
+				<input type="text" name="page" value="">
 				<input type="submit" value="提交">
 			</form>
 		</span>
@@ -83,8 +76,8 @@
 	<div class="search">
 		<div class="title">文章标题搜索</div>
 		<div class="content">
-			<form name="form1" method="post" action="?c=Index&a=index">
-				<input class="search" type="text" name="title">
+			<form name="form1" method="post" action="?c=Index&a=showList">
+				<input class="search" type="text" name="title" >
 				<input type="submit" value="搜索">
 			</form>
 		</div>
@@ -96,7 +89,7 @@
 			<ul>
 			<{foreach $categorys as $category}>
 				<li>
-					<a href="?c=Index&a=index&category_id=<{$category.id}>">	
+					<a href="?c=Index&a=showList&category_id=<{$category.id}>">	
 						<{str_repeat('-',$category.level*4)}><{$category.classname}>
 					</a>
 					(<{$category.article_num}>)

@@ -101,5 +101,44 @@ final class ArticleController extends BaseController{
 		ArticleModel::getInstance()->delete($id);
 		$this->jump("文章删除成功","?c=Article");
 	}
+
+	/**
+	 * 文章编辑
+	 * @Author   Rain
+	 * @DateTime 2017-05-08
+	 * @return   [type]     [description]
+	 */
+	public function edit(){
+		$id = $_GET["id"];
+		$this->denyAccess();
+		$article = ArticleModel::getInstance()->fetchOne("id='$id'");
+		$categorys = CategoryModel::getInstance()->categoryLists(CategoryModel::getInstance()->fetchAll());
+		$this->smarty->assign("categorys",$categorys);
+		$this->smarty->assign("article",$article);
+		$this->smarty->display("edit.html");
+	}
+
+	/**
+	 * 文章更新
+	 * @Author   Rain
+	 * @DateTime 2017-05-08
+	 * @return   [type]     [description]
+	 */
+	public function update(){
+		$this->denyAccess();
+		$id = $_POST['id'];
+		$data['category_id'] = $_POST['category_id'];
+		$data['user_id'] = $_SESSION['uid'];
+		$data['title'] = $_POST['title'];
+		$data['content'] = addslashes($_POST['content']);
+		//stripslashes()
+		$data['orderby'] = $_POST['orderby'];
+		$data['top'] = isset($_POST['top'])?1:0;
+		$res = ArticleModel::getInstance()->update($data,$id);
+		if($res){
+			$this->jump("修改成功","?c=Article");
+		}
+	}
+
 }
  ?>

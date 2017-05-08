@@ -38,7 +38,7 @@ KindEditor.ready(function(K) {
 			<{foreach $categorys as $category}>
 			<option value="<{$category.id}>"
 				<{if $category.id eq $article.category_id}> selected='selected'<{/if}>>
-				<{str_repeat('--',$category.level*4)}>
+				<{str_repeat('-',$category.level*4)}>
 				<{$category.classname}>
 			</option>
 			<{/foreach}>

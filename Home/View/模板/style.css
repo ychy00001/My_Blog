@@ -1484,6 +1484,7 @@ ul.flickr-feed li img {
     width: 1010px;
     margin: 0 auto;
     padding: 20px 0;
+    text-align: center;
 }
 .site-generator p {
     padding: 0
