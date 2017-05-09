@@ -38,7 +38,7 @@ class IndexController extends BaseController{
 		}	
 		
 		//分页
-		$pagesize = 3;
+		$pagesize = 8;
 		$page = !empty($_GET['page'])?$_GET['page']:1;
 		$startrow = ($page-1)*$pagesize;
 		$records = ArticleModel::getInstance()->rowCount($where);
@@ -58,14 +58,19 @@ class IndexController extends BaseController{
 		//获取文章级联查询内容
 		$articles = ArticleModel::getInstance()->fetchAllWithJoin($where,$orderby,$startrow,$pagesize);
 		$pageObj = new Pager($pagesize,$page,$records,$params);
-
+		//单个分页信息显示
+		$pageMsgArr['pagePrevStr'] = $pageObj->showPrevStr(); 
+		$pageMsgArr['pageNextStr'] = $pageObj->showNextStr(); 
+		$pageMsgArr['pageMsgStr'] = $pageObj->showPagMsgStr(); 
 		$pageStr = $pageObj->showPageStr();
+
 		$this->smarty->assign(array(
 			'links' => $links,
 			'categorys' => $categorys,
 			'datas' => $datas,
 			'articles' => $articles,
 			'pageStr' => $pageStr,
+			'pageMsgArr' => $pageMsgArr,
 			));
 
 		$this->smarty->display("index.html");

@@ -72,9 +72,9 @@ final class Pager{
 	 */
 	private function getFirst(){
 		if($this->page == 1){
-			return "[首页]";
+			return "【首页】";
 		}else{
-			return "[<a href='{$this->url}1'>首页</a>]";
+			return "<a href='{$this->url}1'>【首页】</a>";
 		}
 	}
 
@@ -86,9 +86,9 @@ final class Pager{
 	 */
 	private function getPrev(){
 		if($this->page == 1){
-			return "[上一页]";
+			return "【上一页】";
 		}else{
-			return "[<a href='{$this->url}".($this->page-1)."'>上一页</a>]";
+			return "<a href='{$this->url}".($this->page-1)."'>【上一页】</a>";
 		}
 	}
 
@@ -100,9 +100,9 @@ final class Pager{
 	 */
 	private function getNext(){
 		if($this->page == $this->pages){
-			return "[下一页]";
+			return "【下一页】";
 		}else{
-			return "[<a href='{$this->url}".($this->page+1)."'>下一页</a>]";
+			return "<a href='{$this->url}".($this->page+1)."'>【下一页】</a>";
 		}
 	}
 
@@ -114,9 +114,9 @@ final class Pager{
 	 */
 	private function getLast(){
 		if($this->page == $this->pages){
-			return "[末页]";
+			return "【末页】";
 		}else{
-			return "[<a href='{$this->url}{$this->pages}'>末页</a>]";
+			return "<a href='{$this->url}{$this->pages}'>【末页】</a>";
 		}
 	}
 
@@ -133,6 +133,43 @@ final class Pager{
 			$str .= " 每页显示{$this->pagesize}";
 			$str .= " 当前{$this->page}/{$this->pages}";
 			$str .= " {$this->getFirst()}{$this->getPrev()}{$this->getNext()}{$this->getLast()}";
+		}else{
+			$str = "共有{$this->records}条记录";
+		}
+		return $str;
+	}
+
+	/**
+	 * 获取前一页数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-09
+	 * @return   [type]     [description]
+	 */
+	public function showPrevStr(){
+		return $this->getPrev();
+	}
+
+	/**
+	 * 获取后一页数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-09
+	 * @return   [type]     [description]
+	 */
+	public function showNextStr(){
+		return $this->getNext();
+	}
+
+	/**
+	 * 获取分页具体信息
+	 * @Author   Rain
+	 * @DateTime 2017-05-09
+	 * @return   [type]     [description]
+	 */
+	public function showPagMsgStr(){
+		$str = "";
+		if($this->pages > 1){
+			$str = "共有{$this->records}条记录";
+			$str .= " 当前{$this->page}/{$this->pages}";
 		}else{
 			$str = "共有{$this->records}条记录";
 		}
