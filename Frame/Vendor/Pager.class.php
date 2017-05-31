@@ -168,8 +168,9 @@ final class Pager{
 	public function showPagMsgStr(){
 		$str = "";
 		if($this->pages > 1){
-			$str = "共有{$this->records}条记录";
-			$str .= " 当前{$this->page}/{$this->pages}";
+			//总条目数
+			// $str = "总条目:{$this->records}";
+			$str .= "&ensp;{$this->page}/{$this->pages}";
 		}else{
 			$str = "共有{$this->records}条记录";
 		}

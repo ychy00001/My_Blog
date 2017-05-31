@@ -80,9 +80,9 @@ final class ArticleController extends BaseController{
 		$data['category_id'] = $_POST['category_id'];
 		$data['user_id'] = $_SESSION['uid'];
 		$data['title'] = $_POST['title'];
-		$data['content'] = $_POST['content'];
+		$data['content'] = addslashes($_POST['content']);
 		$data['orderby'] = $_POST['orderby'];
-		$data['top'] = isset($_POST['orderby'])?1:0;
+		$data['top'] = isset($_POST['top'])?1:0;
 		$data['addate'] = time();
 		//调用模型类对象insert()方法
 		ArticleModel::getInstance()->insert($data);
@@ -93,7 +93,6 @@ final class ArticleController extends BaseController{
 	 * 文章删除功能
 	 * @Author   Rain
 	 * @DateTime 2017-05-07
-	 * @return   [type]     [description]
 	 */
 	public function delete(){
 		$this->denyAccess();
@@ -106,7 +105,6 @@ final class ArticleController extends BaseController{
 	 * 文章编辑
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @return   [type]     [description]
 	 */
 	public function edit(){
 		$id = $_GET["id"];
@@ -122,7 +120,6 @@ final class ArticleController extends BaseController{
 	 * 文章更新
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @return   [type]     [description]
 	 */
 	public function update(){
 		$this->denyAccess();
@@ -141,4 +138,3 @@ final class ArticleController extends BaseController{
 	}
 
 }
- ?>

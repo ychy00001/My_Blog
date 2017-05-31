@@ -68,7 +68,7 @@ final class CategoryController extends BaseController {
 	 * 编辑文章分类
 	 * @Author   Rain
 	 * @DateTime 2017-05-07
-	 * @return   [type]     [description]
+	 * @Return   [type]     [description]
 	 */
 	public function edit(){
 		$id = $_GET["id"];
@@ -97,4 +97,3 @@ final class CategoryController extends BaseController {
 		}
 	}
 }
- ?>

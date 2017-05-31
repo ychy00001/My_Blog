@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * ========================
  * Description  : 默认控制器
@@ -35,8 +35,11 @@ class IndexController extends BaseController{
 		}
 		if(!empty($_REQUEST['title'])){
 			$where .= " AND title LIKE'%".$_REQUEST['title']."%'";
-		}	
-		
+		}
+        if(!empty($_REQUEST['date'])){
+            $where .= " AND date_format(from_unixtime(article.addate),'%Y年%m月') = '".$_REQUEST['date']."'";
+        }
+
 		//分页
 		$pagesize = 8;
 		$page = !empty($_GET['page'])?$_GET['page']:1;
@@ -59,11 +62,10 @@ class IndexController extends BaseController{
 		$articles = ArticleModel::getInstance()->fetchAllWithJoin($where,$orderby,$startrow,$pagesize);
 		$pageObj = new Pager($pagesize,$page,$records,$params);
 		//单个分页信息显示
-		$pageMsgArr['pagePrevStr'] = $pageObj->showPrevStr(); 
-		$pageMsgArr['pageNextStr'] = $pageObj->showNextStr(); 
-		$pageMsgArr['pageMsgStr'] = $pageObj->showPagMsgStr(); 
+        $pageMsgArr['pagePrevStr'] = $pageObj->showPrevStr();
+		$pageMsgArr['pageNextStr'] = $pageObj->showNextStr();
+		$pageMsgArr['pageMsgStr'] = $pageObj->showPagMsgStr();
 		$pageStr = $pageObj->showPageStr();
-
 		$this->smarty->assign(array(
 			'links' => $links,
 			'categorys' => $categorys,
@@ -80,7 +82,6 @@ class IndexController extends BaseController{
 	 * 博文目录
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @return   [type]     [description]
 	 */
 	public function showList(){
 		//获取友情链接
@@ -98,8 +99,12 @@ class IndexController extends BaseController{
 		}
 		if(!empty($_REQUEST['title'])){
 			$where .= " AND title LIKE '%".$_REQUEST['title']."%'";
-		}	
-		
+		}
+
+		if(!empty($_REQUEST['date'])){
+            $where .= " AND date_format(from_unixtime(addate),'%Y年%m月') = '".$_REQUEST['date']."'";
+        }
+
 		//分页
 		$pagesize = 30;
 		$page = !empty($_GET['page'])?$_GET['page']:1;
@@ -150,7 +155,6 @@ class IndexController extends BaseController{
 		$id = $_GET['id'];
 		$article = ArticleModel::getInstance()->fetchOneWithJoin($id);
 
-
 		//更新阅读数
 		ArticleModel::getInstance()->updateRead($id);
 
@@ -191,4 +195,3 @@ class IndexController extends BaseController{
 
 
 }
- ?>

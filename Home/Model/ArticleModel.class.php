@@ -17,7 +17,7 @@ final class ArticleModel extends BaseModel{
 	 * 获取按年月分类的文章信息
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @return   [type]     [description]
+	 * @Return   返回所有文章信息的条目数
 	 */
 	public function fetchAllWithJoinAndCount(){
 		//构建查询SQL语句
@@ -32,11 +32,11 @@ final class ArticleModel extends BaseModel{
 	 * 获取作者以及分类
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @param    string     $where    [查询条件]
-	 * @param    string     $orderby  [排序条件]
-	 * @param    integer    $startrow [开始未位置]
-	 * @param    integer    $pagesize [offset]
-	 * @return   [array]               [返回对应书记局]
+	 * @Param    string     $where    [查询条件]
+	 * @Param    string     $orderby  [排序条件]
+	 * @Param    integer    $startrow [开始未位置]
+	 * @Param    integer    $pagesize [offset]
+	 * @Return   关联表返回所有文章的信息
 	 */
 	public function fetchAllWithJoin($where="2>1",$orderby="id DESC",$startrow=0,$pagesize=10){
 		$sql = "SELECT article.*,user.name,category.classname from article";
@@ -52,8 +52,8 @@ final class ArticleModel extends BaseModel{
 	 * 获取指定id连表查询的数据 (查询一篇文章)
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @param    [integer]     $id [需要查询的编号]
-	 * @return   [array]         [一条数据]
+	 * @Param    [integer]     $id [需要查询的编号]
+	 * @Return   [array]         [一条数据]
 	 */
 	public function fetchOneWithJoin($id){
 		$sql = "SELECT article.*,user.name,category.classname FROM article ";
@@ -67,8 +67,8 @@ final class ArticleModel extends BaseModel{
 	 * 更新阅读数
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @param    [integer]     $id [文章id]
-	 * @return   [boolean]         [执行结果]
+	 * @Param    [integer]     $id [文章id]
+	 * @Return   [boolean]     [执行结果]
 	 */
 	public function updateRead($id){
 		$sql = "UPDATE {$this->table} SET `read`=`read`+1 where id = {$id}";

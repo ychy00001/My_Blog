@@ -33,10 +33,10 @@ final class CategoryModel extends BaseModel{
 	 * 获取链表查询的分类数据 关联该分类的文章
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
-	 * @return   [array]     [每个分类有多少文章]
+     * @Return 所有连表查询所有内容
 	 */
 	public function fetchAllWithJoin(){
-		$sql = "SELECT category.*,count(article.id) as article_num FROM {$this->table} ";
+		$sql = "SELECT category.*,count(article.id) as article_num FROM {$this->table}";
 		$sql .= " LEFT JOIN article ON category.id = article.category_id ";
 		$sql .= " GROUP BY category.id";
 		return $this->pdo->fetchAll($sql);

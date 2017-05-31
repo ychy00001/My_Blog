@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 use \Frame\Libs\BaseController;
 use \Admin\Model\UserModel;
+use \Frame\Vendor\Captcha;
 
 final class UserController extends BaseController{
 
@@ -164,7 +165,7 @@ final class UserController extends BaseController{
 	 * @DateTime 2017-05-06
 	 */
 	public function captcha(){
-		$c = new \Frame\Vendor\Captcha();
+		$c = new Captcha();
 		$_SESSION['captcha'] = $c->getCode();
 	}
 
@@ -182,4 +183,3 @@ final class UserController extends BaseController{
 	}
 
 }
- ?>

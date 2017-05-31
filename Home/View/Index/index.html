@@ -100,7 +100,7 @@
 </ul><!-- End Intro --> 
 
 <div align=center>
-<div style=“width:960px; margin:0 auto; height:90px;”>
+<div style="width:960px; margin:0 auto; height:90px;">
 <script>
 (function() {
     var s = "_" + Math.random().toString(36).slice(2);
@@ -150,13 +150,13 @@
 </div>
 <!-- End Blog Grid -->
 
-<!-- Begin Page-navi -->
+<!-- Begin Page-nav -->
     <div id="navigation">
     	<div class="nav-previous"><span class='meta-nav-prev'><{$pageMsgArr['pagePrevStr']}></span></div>
-    	<div class="nav-msg"><span clss='meta-nav-msg'><{$pageMsgArr['pageMsgStr']}></span></div>
+    	<div class="nav-msg"><span class='meta-nav-msg'><{$pageMsgArr['pageMsgStr']}></span></div>
     	<div class="nav-next"><span class='meta-nav-next'><{$pageMsgArr['pageNextStr']}></span> </div>
     </div>
-    <!-- End Page-navi --> 
+    <!-- End Page-nav -->
 
 </div>
 <!-- End Wrapper -->
@@ -168,7 +168,7 @@
 			<div class="widget widget_search">
 				<h3 class="widget-title">文章搜索</h3>
 				<form class="searchform" method="get" action="?c=Index&a=index">
-					<input type="text" name="s" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>
+					<input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>
 				</form>
 			</div>
 			
@@ -180,8 +180,8 @@
 				<ul>
 					<{foreach $datas as $data}>
 						<li>
-							<a href="javascript:void(0)"><{$data.months}></a>
-							(<font color=""><{$data.article_count}></font>)
+							<a href="?c=Index&a=index&date=<{$data.months}>"><{$data.months}></a>
+							(<span><{$data.article_count}></span>)
 						</li>
 					<{/foreach}>
 				</ul>
