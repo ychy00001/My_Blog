@@ -74,7 +74,7 @@ final class Pager{
 		if($this->page == 1){
 			return "【首页】";
 		}else{
-			return "<a href='{$this->url}1'>【首页】</a>";
+			return "<a href='{$this->url}1' onclick='loadContentFrame()'>【首页】</a>";
 		}
 	}
 
@@ -88,7 +88,7 @@ final class Pager{
 		if($this->page == 1){
 			return "【上一页】";
 		}else{
-			return "<a href='{$this->url}".($this->page-1)."'>【上一页】</a>";
+			return "<a href='{$this->url}".($this->page-1)."' onclick='loadContentFrame()'>【上一页】</a>";
 		}
 	}
 
@@ -102,7 +102,7 @@ final class Pager{
 		if($this->page == $this->pages){
 			return "【下一页】";
 		}else{
-			return "<a href='{$this->url}".($this->page+1)."'>【下一页】</a>";
+			return "<a href='{$this->url}".($this->page+1)."' onclick='loadContentFrame()'>【下一页】</a>";
 		}
 	}
 
@@ -116,7 +116,7 @@ final class Pager{
 		if($this->page == $this->pages){
 			return "【末页】";
 		}else{
-			return "<a href='{$this->url}{$this->pages}'>【末页】</a>";
+			return "<a href='{$this->url}{$this->pages}' onclick='loadContentFrame()'>【末页】</a>";
 		}
 	}
 

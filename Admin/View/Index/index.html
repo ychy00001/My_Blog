@@ -1,19 +1,307 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>网站后台管理系统</title>
+	<title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- GOOGLE FONTS -->
+	<link rel="stylesheet" href="./Public/Admin/Css/fonts.css">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="./Public/Admin/Vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./Public/Admin/Vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./Public/Admin/Vendor/linearicons/style.css">
+	<link rel="stylesheet" href="./Public/Admin/Vendor/chartist/css/chartist-custom.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="./Public/Admin/Css/main.css">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="./Public/Admin/Images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="./Public/Admin/Images/favicon.png">
 </head>
 
-<frameset rows="64,*" framespacing="0" frameborder="1" border="false" scrolling="yes" id='frametop'>
-  <frame src="?c=Index&a=top" name="top" scrolling="No" noresize="noresize" />
-  <frameset framespacing="0" border="false" cols="182,10,*" frameborder="0" id="frameb" scrolling="yes">
-    <frame src="?c=Index&a=left" name="left" scrolling="auto" noresize="noresize" />
-	<frame src="?c=Index&a=center" name="center" scrolling="no"  noresize="noresize" />
-    <frame src="?c=Index&a=main" name="main" />
-  </frameset>
-</frameset>
-<noframes>
-<body>你的浏览器版本过低！IE5及以上版本才能使用！</body>
-</noframes>
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="index.html"><img src="./Public/Admin/Images/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+			</div>
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<form class="navbar-form navbar-left">
+					<div class="input-group">
+						<input type="text" value="" class="form-control" placeholder="请输入关键字">
+						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+					</div>
+				</form>
+				<div class="navbar-btn navbar-btn-right">
+					<a class="btn btn-success" href="index.php" title="博客首页" ><i class="fa fa-rocket"></i> <span>博客首页</span></a>
+				</div>
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+								<i class="lnr lnr-alarm"></i>
+								<span class="badge bg-danger">3</span>
+							</a>
+							<ul class="dropdown-menu notifications">
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>bg-warning</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>bg-danger</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>bg-success</a></li>
+								<li><a href="#" class="more">显示所有通知</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">基本使用</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./Public/Admin/Images/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="lnr lnr-user"></i> <span>个人</span></a></li>
+								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>
+								<li><a href="?c=User&a=logout"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
+							</ul>
+						</li>
+						<!-- <li>
+							<a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="admin.php" class="active"><i class="lnr lnr-home"></i> <span>首页</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>文章管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href='?c=Article&a=add' onClick="loadContentFrame()">添加文章</a></li>
+									<li><a href='?c=Article&a=index' onClick="loadContentFrame()">管理文章</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>分类管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href='?c=Category&a=add'>添加分类</a></li>
+									<li><a href='?c=Category&a=index'>管理分类</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-alarm"></i> <span>评论管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href='?c=Comment&a=index'>管理文章评论</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-linearicons"></i> <span>友情链接</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href='?c=Links&a=add'>添加链接</a></li>
+									<li><a href='?c=Links&a=index'>管理链接</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>用户管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href='?c=User&a=add'>添加用户</a></li>
+									<li><a href='?c=User&a=index'>用户管理</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="index.html" class="active"><i class="lnr lnr-dice"></i> <span>测试</span></a></li>
+						<li><a href="index.html" class="active"><i class="lnr lnr-text-format"></i> <span>测试</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<!-- OVERVIEW -->
+					<div class="panel panel-headline">
+						<div class="panel-heading">
+							<h3 class="panel-title"><{$smarty.session.username}>,欢迎登陆</h3>
+							<p class="panel-subtitle">登陆时间: <{$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<!-- RECENT PURCHASES -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">系统信息</h3>
+									<div class="right">
+										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+									</div>
+								</div>
+								<div class="panel-body no-padding">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>系统名称</th>
+												<th>详细信息</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><a href="#">用户名</a></td>
+												<td><{$smarty.session.username}></td>
+											</tr>
+											<tr>
+												<td><a href="#">IP地址</a></td>
+												<td><{$smarty.server.REMOTE_ADDR}></td>
+											</tr>
+											<tr>
+												<td><a href="#">身份过期</a></td>
+												<td><{ini_get("session.gc_maxlifetime")}>秒</td>
+											</tr>
+											<tr>
+												<td><a href="#">服务器域名</a></td>
+												<td><{$smarty.server.SERVER_NAME}></td>
+											</tr>
+											<tr>
+												<td><a href="#">PHP环境</a></td>
+												<td><{$smarty.server.SERVER_SOFTWARE}></td>
+											</tr>
+											<tr>
+												<td><a href="#">官方网站</a></td>
+												<td><a href="http://www.ychy00001.xin" target="_blank">www.ychy00001.xin</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END RECENT PURCHASES -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">京ICP备17029279号 &copy; Copyright 2017-2018 <a href="http://www.ychy00001.xin" target="_blank" title="远方小镇">ychy0001.xin</a>  All rights reserved </p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="./Public/Admin/Vendor/jquery/jquery.min.js"></script>
+	<script src="./Public/Admin/Vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./Public/Admin/Vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="./Public/Admin/Vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="./Public/Admin/Js/klorofil-common.js"></script>
+	<!-- kindEditor 编辑器脚本 -->
+	<script src="./Public/Admin/Js/editor/kindeditor-min.js" charset="utf-8"></script>
+	<script src="./Public/Admin/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
+</body>
+<script type="text/javascript">
+	//ajax获取点击连接的数据 替换 .main中的内容
+	function loadContentFrame(event) {
+		//网络连接参数设置
+		var param = {
+			type:"get",
+			url:"",
+			data:"",
+			success:function(data){
+				var star_str = "<!-- MAIN -->";
+				var end_str = "<!-- END MAIN -->";
+				var start_index = data.indexOf(star_str);
+				var end_index = data.lastIndexOf(end_str);
+				var content = data.substring(start_index,end_index);
+				$(".main").replaceWith(content);
+				//存在textarea标签  进行渲染
+				if(content.indexOf("<textarea") !== -1){
+					//渲染Kind编辑器
+					initKindEditor();
+				}
+			}
+		};
+
+		//判断事件源
+		if((typeof event=='string') && event.constructor==String){
+			//说明event是一个url连接 （跳转连接）
+			param.type = "get";
+			param.url = event;
+		}else{
+			event = event ? event : window.event; 
+			var obj = event.srcElement ? event.srcElement : event.target; 
+			//这时obj就是触发事件的对象，可以使用它的各个属性 
+			//还可以将obj转换成jquery对象，方便选用其他元素 
+			var $obj = $(obj);
+			//如果是a标签
+			if($obj[0].localName == 'a'){
+				param.type = "get";
+				param.url = $obj.attr("href");
+			}else if($obj[0].localName == 'form'){
+				console.log($obj);
+				param.type = $obj[0].method;
+				//获取 www.xxx.com?action=xx&controll=xxx
+				var actionUrl = $obj[0].action;
+				var sub_flag = actionUrl.indexOf("?");
+				//截取字符串 获取?action=xx&controll=xxx ?c=Article&a=insert
+				param.url = actionUrl.substr(sub_flag,actionUrl.length);
+				if($obj[0].length > 1){
+					//循环添加url的参数
+					for(var i=0;i<$obj[0].length-1;i++){
+						param.data += $obj[0][i].name;
+						param.data += "=" + $obj[0][i].value +"&";
+					}
+					//category_id=1&title=testtest&orderby=50&top=0&=&content=&=添加
+					param.data = param.data.substr(0,param.data.length-1);
+					alert(param.data);
+				}
+			}
+		}
+		//请求网络
+		$.ajax(param);
+		//取消网页链接跳转
+		if((typeof event=='string') && event.constructor==String){
+			//事件源是url 连接
+			return false;
+		}else if (event && event.preventDefault) {
+			//事件源是点击事件
+			event.preventDefault();
+		} else {
+			//兼容ie
+			window.event.returnValue = false; 
+		}
+	}
+
+	//动态加载 KindEditor在线编辑器
+	function initKindEditor(){
+		$.getScript('./Public/Admin/Js/editor/kindeditor-min.js', function() {
+			$.getScript('./Public/Admin/Js/editor/lang/zh_CN.js', function() {
+				KindEditor.basePath = './Public/Admin/Js/editor/';
+				KindEditor.create('textarea[name="content"]');
+			});
+		});
+	}	
+</script>
 </html>

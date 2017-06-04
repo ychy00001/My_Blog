@@ -1,0 +1,14 @@
+.site-generator-wrapper {
+	position:absolute;
+	top: 553px;
+	width: 100%;
+    overflow: hidden;
+}
+.site-generator {
+    margin: 0 auto;
+    padding: 20px 0;
+    text-align: center;
+}
+.site-generator p {
+    padding: 0
+}

@@ -136,11 +136,14 @@ final class UserController extends BaseController{
 		//获取表单提交值
 		$username = $_POST['username'];
 		$password = md5($_POST['password']);
-		$verify = $_POST['verify'];
+
+		//TODO 更换登陆界面 取消验证码验证
+		// $verify = $_POST['verify'];
 		//判断验证码
-		if(strtolower($verify) != $_SESSION['captcha']){
-			$this->jump("验证码输入错误","?c=User&a=login");
-		}
+		// if(strtolower($verify) != $_SESSION['captcha']){
+		// 	$this->jump("验证码输入错误","?c=User&a=login");
+		// }
+		
 		$data['last_login_ip'] = $_SERVER['REMOTE_ADDR'];
 		$data['last_login_time'] = time();
 

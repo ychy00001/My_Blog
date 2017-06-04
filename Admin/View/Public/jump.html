@@ -3,43 +3,74 @@
 <head>
 <meta charset="utf-8">
 <title>操作提示</title>
-<style type="text/css">
-*{margin:0px;padding:0px;}
-.box{
-	width:450px;
-	border:1px solid #f0f0f0;
-	background:#FFFFCC;
-	margin:100px auto;
-	padding:20px;
-	font-size:14px;
-	line-height:180%;
-	color:#444;
-}
-h2{margin-bottom:10px;}
-#time{color:#FF0000;}
-.color2{color:#0099FF;}
-a.a1:link,a.a1:visited{color:#0099FF;text-decoration:none;}
-a.a1:hover{color:#FF0000;text-decoration:underline;}
-</style>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!-- GOOGLE FONTS -->
+<link rel="stylesheet" href="./Public/Admin/Css/fonts.css">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="./Public/Admin/Vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./Public/Admin/Vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="./Public/Admin/Vendor/linearicons/style.css">
+<link rel="stylesheet" href="./Public/Admin/Vendor/chartist/css/chartist-custom.css">
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="./Public/Admin/Css/main.css">
 </head>
 
 <body>
-<div class="box">
-	<h2 align="center">操作提示</h2>
-	<p><b>提示：<{$message}></b></p>
-	<p>系统将在 <span id="time">3</span> 秒钟后自动跳转，如果不想等待，请点击 <a target="main" class="a1" href="<{$url}>">这里</a> 跳转。</p>
-</div>
+<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<!-- 下面标记最为首页判断跳转页面的标志 不要删除 -->
+		<!-- &page_jump& -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<!-- <h3 class="page-title">页面跳转</h3> -->
+					<div class="row">
+						<div class="col-md-8">
+							<!-- PANEL HEADLINE -->
+							<div class="panel panel-headline">
+								<div class="panel-heading">
+									<h3 class="panel-title">页面跳转</h3>
+								</div>
+								<div class="panel-body">
+									<h4>提示：<{$message}></h4>
+									<p>系统将在 <span id="time">3</span> 秒钟后自动跳转，如果不想等待，请点击 <a target="_self" class="a1" href="<{$url}>"  onClick="loadContentFrame()">这里</a> 跳转。</p>
+								</div>
+							</div>
+							<!-- END PANEL HEADLINE -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		<div>
+	</div>
+
+	<script type="text/javascript">
+		function playSec(num){
+			time.innerHTML = num;
+			if(--num >0){
+				setTimeout("playSec("+num+")",1000);
+			}else{
+				//优先ajax验证 首页会返回false 不跳转页面
+				//如果加载了当前页面的方法 则返回true 跳转页面
+				if(loadContentFrame("<{$url}>")){
+					location.href="<{$url}>";
+				}		
+			}
+		}
+		playSec(<{$time}>);
+	</script>
+<!-- END MAIN -->
 </body>
-</html>
 <script type="text/javascript">
-function playSec(num){
-	time.innerHTML = num;
-	if(--num >0){
-		setTimeout("playSec("+num+")",1000);
-	}else{
-		//跳转到指定的地址
-		location.href="<{$url}>";
-	}
-}
-playSec(<{$time}>);
+	//非登陆状态 页面跳转
+	//如果是登陆后 管理系统的跳转 交给Admin/Index/index.html 中的该方法执行
+	function loadContentFrame(){
+		return true;
+	};
 </script>
+</html>

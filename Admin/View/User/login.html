@@ -1,112 +1,78 @@
-<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
 <head>
-<meta charset="utf-8">
-<title>管理员登录</title>
-<link href="./Public/Admin/Css/public.css"   rel="stylesheet" type="text/css" />
-<link href="./Public/Admin/Css/login.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-//(1)定义表单验证的函数
-function checkForm()
-{
-	//定义用户名、密码正则表达式
-	var pattern = /^[a-z0-9]{5,15}$/;
-	if(!pattern.test(document.form1.username.value))
-	{
-		window.alert("用户名称没有填写或格式不正确！");
-		document.form1.username.focus();
-		return false;
-	}else if(!pattern.test(document.form1.password.value))
-	{
-		alert("用户密码没有填写或格式不正确！");
-		document.form1.password.focus();
-		return false;
-	}else if(document.form1.verify.value.length!=4)
-	{
-		window.alert("验证码没有填写或长度不够！");
-		document.form1.verify.focus();
-		return false;
-	}
-}
+	<title>登陆 | 远方小镇后台管理</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- GOOGLE FONTS -->
+	<link rel="stylesheet" href="./Public/Admin/Css/fonts.css">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="./Public/Admin/Css/bootstrap.min.css">
+	<link rel="stylesheet" href="./Public/Admin/Vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./Public/Admin/Vendor/linearicons/style.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="./Public/Admin/Css/main.css">
+	<link rel="stylesheet" href="./Public/Admin/Css/site.css">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="./Public/Admin/Images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="./Public/Admin/Images/favicon.png">
 
-//(2)获取验证码
-function getCaptcha(imgObj)
-{
-	imgObj.src = "?c=User&a=captcha&"+Math.random();
-}
-
-//(3)初始化用户名为获得焦点
-function setFocus()
-{
-	if(document.form1.username.value=="")
-	{
-		document.form1.username.focus();
-	}
-}
-//(4)网页加载完成，自动获得焦点
-window.onload = setFocus;
-</script>
+	<script type="text/javascript" src="./Public/Admin/Js/login.js"></script>
 </head>
+
 <body>
-<center>
-<form name="form1" method="post" action="?c=User&a=loginCheck" id="form1" onSubmit="return checkForm()">
-
-
-<div id="position">
-	<div id="inposition">
-		<div class="login-left">
-			<div class="login-left-logo"><img src="./Public/Admin/Images/logo.png"  width="296" height="50" /></div>
-			<div class="login-left-content">
-				<ul>
-					<li>为莘莘学子改变命运而讲课，为千万学生少走弯路而著书</li>
-					<li>探索教育本源，开辟教育新生态</li>
-					<li>务实、质量、创新、分享、专注、责任</li>
-					<li>爱岗敬业、为人师表、诚实守信、团结友善、勇于担当、乐于奉献</li>
-			</div>
-		</div>
-        <div class="login-right">
-			<div id="UpdatePanel1">
-            	<div class="login-right-title">网站后台管理系统</div>
-                <div class="login-right-input">
-                <table width="200" border="0" cellspacing="0" cellpadding="0">
-                	<tr>
-                    	<td nowrap="nowrap" align="right" id="tdLeft">用户名：</td>
-                        <td><input name="username" type="text" id="username" class="input" size="10" maxlength="20"/></td>
-					</tr>
-					<tr>
-						<td style="height:30px" align="right">密&nbsp;&nbsp;码：</td>
-						<td style="height:30px"><input name="password" type="password" id="password" class="input" size="10" maxlength="32"/></td>
-					</tr> 
-					<tr>
-						<td align="right">验证码：</td>
-						<td><input id="verify" name="verify"  class="input2" maxlength="4">&nbsp;<img style="float:right;cursor:pointer;" width="70" src="?c=User&a=captcha" onClick="getCaptcha(this)" /></td>
-					</tr>
-					<tr>
-						<td style="height: 30px" align="right"></td>
-						<td style="height: 30px" nowrap="nowrap">
-							<input type="submit" name="btnLogin" value="登 录" id="btnLogin" class="button" />
-							<input type="reset" name="btnTest" value="清 除" id="btnTest" class="button" />
-						</td>
-					</tr>
-				</table>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+							<!-- Faraway town -->
+								<div class="logo text-center"><img src="./Public/Admin/Images/logo-dark.png" alt="Klorofil Logo"></div>
+								<p class="lead">登陆</p>
+							</div>
+							<form class="form-auth-small" name="form1" method="post" action="?c=User&a=loginCheck" id="form1" onSubmit="return checkForm()">
+								<div class="form-group">
+									<label for="signin-email" class="control-label sr-only">Email</label>
+									<input type="text" class="form-control" name="username" id="signin-email" value="" placeholder="请输入用户名">
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Password</label>
+									<input type="password" class="form-control" name="password" id="signin-password" value="" placeholder="请输入密码">
+								</div>
+								<div class="form-group clearfix">
+									<label class="fancy-checkbox element-left">
+										<input type="checkbox">
+										<span>记住密码</span>
+									</label>
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+								<div class="bottom">
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">忘记密码?</a></span>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="right">
+						<div class="overlay"></div>
+						<div class="content text">
+							<h1 class="heading">远方小镇博客后台管理</h1>
+							<p>作者:Rain</p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
+		<!-- END WRAPPER -->
+		<div class="site-generator-wrapper">
+		    <div class="site-generator">京ICP备17029279号 &copy; Copyright 2017-2018 ychy0001.xin All rights reserved</div>
+		</div>
 	</div>
-</div>
-</form>
-</center>
-<!--顶部背景DIV-->
-<div id="header"></div>
-<!--欢迎光临-->
-<div id="content"><img src="./Public/Admin/Images/login-wel.gif" /></div>
-<div id="buttom">
-	<div class="copy2">
-		<nobr>Copyright &copy; 2006-<{$smarty.now|date_format:'%Y'}>&nbsp;&nbsp;itcast.cn All Rights Reserved.</nobr>
-	</div>
-	<div class="copy"><img src="./Public/Admin/Images/login-copy.gif" /></div>
-</div>
 </body>
+
 </html>
-<script language="javascript">
-</script>

@@ -10,8 +10,8 @@ return array(
 	'db_type' => 'mysql',
 	'db_host' => 'localhost',
 	'db_port' => '3306',
-	'db_user' => 'root',
-	'db_pass' => 'root',
+	'db_user' => 'ychy',
+	'db_pass' => '515618',
 	'db_name' => 'blog',
 	'charset' => 'utf8',
 

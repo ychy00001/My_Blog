@@ -1,75 +1,100 @@
-﻿<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>文章管理</title>
-<link href="./Public/Admin/Css/public.css" type="text/css" rel="stylesheet" />
-<script src="./Public/Admin/Js/editor/kindeditor-min.js" charset="utf-8"></script>
-<script src="./Public/Admin/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
-<script>
-//引入KindEditor在线编辑器
-var editor;
-KindEditor.ready(function(K) {
-	editor = K.create('textarea[name="content"]', {
-		allowFileManager : true
-	});
-});
-</script>
+	<title>文章管理 | 文章列表</title>
 </head>
 
 <body>
-<table width="100%" border="0" align="center" cellpadding="1" cellspacing="1" class="border">
-	<tr class="topbg"><td>文章管理</td></tr>
-	<tr class="tdbg">
-		<td height="30">&nbsp;&nbsp;
-			<a href="?c=Article&a=index">管理首页</a>&nbsp;|&nbsp;
-			<a href="?c=Article&a=add">添加文章</a>
-		</td>
-	</tr>
-</table>
-<br />
-<form name="form1" method="post" action="?c=Article&a=update">
-<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="border">
-<tr class="title"><td colspan="6" align="center">修改文章</td></tr>
-<tr class="tdbg">
-	<td width="17%" height="30" align="right">文章类别：</td>
-	<td>
-		<select name="category_id">
-			<option value="0">无分类</option>
-			<{foreach $categorys as $category}>
-			<option value="<{$category.id}>"
-				<{if $category.id eq $article.category_id}> selected='selected'<{/if}>>
-				<{str_repeat('-',$category.level*4)}>
-				<{$category.classname}>
-			</option>
-			<{/foreach}>
-		</select>      
-	</td>
-</tr>
-<tr class="tdbg">
-	<td height="30" align="right">标&nbsp;&nbsp;题：</td>
-	<td colspan="5"><input name="title" value="<{$article.title}>" type="text" size="90" maxlength="50" /></td>
-</tr>
-<tr class="tdbg">
-	<td height="30" align="right">排&nbsp;&nbsp;序：</td>
-	<td>
-		<input name="orderby" type="text" value="<{$article.orderby}>" size="2" maxlength="3" />
-		<span style="padding-left:20px;">置顶：</span>
-		<input name="top" type="checkbox" value="1"<{if $article.top eq 1}> checked='checked'<{/if}> />
-	</td>
-</tr>
-<tr class="tdbg">
-	<td height="30" align="right">内&nbsp;&nbsp;容：</td>
-	<td><textarea name="content" style="width:95%;height:300px;"><{$article.content}></textarea></td>
-</tr>
-<tr class="tdbg">
-	<td height="30" align="right">&nbsp;</td>
-	<td colspan="5">
-		<input type="hidden" name="id" value="<{$article.id}>" />
-		<input type="submit" value="更新" />
-		<input type="button" onclick="history.go(-1)" value="返回" />
-	</td>
-</tr>
-</table>
-</form>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">文章管理</h3>
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">文章详情</h3>
+								</div>
+								<div class="panel-body">
+									<form class="form-inline" method="post" action="?c=Article&a=index" onsubmit='loadContentFrame()'>
+										<div class="form-group">
+											<select class="form-control" name="category_id">
+												<option value="">文章分类</option>
+												<{foreach $categorys as $category}>
+												<option value="<{$category.id}>"
+												<{if !empty($smarty.request.category_id) and $smarty.request.category_id eq $category['id']}>
+													selected
+												<{/if}>
+												>
+													<{str_repeat('-',$category.level*4)}>
+													<{$category.classname}>
+												</option>
+												<{/foreach}>
+											</select>
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<input class="form-control" name="keyword" type="text" placeholder="请输入文章标题关键字"
+												<{if !empty($smarty.request.keyword)}>
+													value="<{$smarty.request.keyword}>"
+												<{/if}>
+												>
+												<span class="input-group-btn" ><input type="submit" class="btn btn-primary" type="button" value="Go!"></span>
+											</div>
+										</div>
+									</form>
+
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>编号</th>
+												<th>分类</th>
+												<th>标题</th>
+												<th>作者</th>
+												<th>发布时间</th>
+												<th>操作选项</th>
+											</tr>
+										</thead>
+										<tbody>
+											<{foreach $articles as $article}>
+											<tr class="tdbg" align="center">
+												<td><{$article.id}></td>
+												<td align="left"><{$article.classname}></td>
+												<td align="left">
+													<a target="_blank" href="#"><{$article.title}></a> 
+													<{if $article.top}>[<font color="red">顶</font>]<{/if}></td>
+												<td><{$article.username}></td>
+												<td><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+												<td>
+													<a href="?c=Article&a=edit&id=<{$article.id}>">修改</a> | 
+													<a href="javascript:void(0)" onClick="confirmDel(<{$article.id}>)">删除</a>
+												</td>
+											</tr>
+											<{/foreach}>
+											<!--文章分页-->
+											<tr class="tdbg">
+												<td colspan="7" align="center"><{$pageStr}></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+	</div>
 </body>
+
 </html>

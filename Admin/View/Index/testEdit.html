@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<button>点击</button>
+	<!-- <textarea name="content" style="width:95%;height:300px;"></textarea> -->
+</body>
+<script>
+	var btn = document.getElementsByTagName("button")[0];
+	btn.onclick = function(){
+		document.getElementsByTagName("body")[0].innerHTML = '<textarea name="content" style="width:95%;height:300px;"></textarea>';
+		init();
+	};
+	
+</script>
+<script src="../../../Public/Admin/Js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript">
+var init = function initEdit(){
+	//动态加载 KindEditor在线编辑器
+	$.getScript('../../../Public/Admin/Js/editor/kindeditor-min.js', function() {
+		$.getScript('../../../Public/Admin/Js/editor/lang/zh_CN.js', function() {
+			KindEditor.basePath = '/My_Blog/Public/Admin/Js/editor/';
+			KindEditor.create('textarea[name="content"]');
+		});
+	});
+}
+</script>
+</html>

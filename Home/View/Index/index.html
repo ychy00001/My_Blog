@@ -136,7 +136,7 @@
 				<h2 class="title">
 					<a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a>
 				</h2>
-				<{$article.content}>
+				<{strip_tags($article.content)|truncate:1500:"..."}>
 				<div class="details">
 					<span class="icon-standard"><a href="#"><{$article['addate']|date_format:'%Y-%m-%d- %H:%M:%S'}></a></span>
 					<span class="likes"><a href="#" class="likeThis"><{$article.praise}></a></span>
@@ -237,7 +237,7 @@
 	</div>
 </div>
 <div class="site-generator-wrapper">
-	<div class="site-generator">&copy; Copyright &copy; 2013.Company name All rights reserved.<a target="_blank" href="http://www.huiyi8.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
+	<div class="site-generator">京ICP备17029279号 &copy; Copyright 2017-2018 ychy0001.xin All rights reserved</div>
 </div>
 <!-- End Footer --> 
 <script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
