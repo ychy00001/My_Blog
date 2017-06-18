@@ -64,6 +64,7 @@ final class ArticleController extends BaseController{
 	 * @DateTime 2017-05-07
 	 */
 	public function add(){
+		$this->denyAccess();
 		$categorys = CategoryModel::getInstance()->categoryLists(
 				CategoryModel::getInstance()->fetchAll()
 			);
@@ -85,8 +86,12 @@ final class ArticleController extends BaseController{
 		$data['top'] = isset($_POST['top'])?1:0;
 		$data['addate'] = time();
 		//调用模型类对象insert()方法
-		ArticleModel::getInstance()->insert($data);
-		$this->jump("文章添加成功","?c=Article");
+		$flag = ArticleModel::getInstance()->insert($data);
+		if($flag){
+			$this->jump("文章插入成功","?c=Article");
+		}else{
+			$this->jump("插入失败！请重试！！！","?c=Article");
+		}
 	}
 
 	/**
@@ -97,8 +102,13 @@ final class ArticleController extends BaseController{
 	public function delete(){
 		$this->denyAccess();
 		$id = $_GET["id"];
-		ArticleModel::getInstance()->delete($id);
-		$this->jump("文章删除成功","?c=Article");
+		$flag = ArticleModel::getInstance()->delete($id);
+		if($flag){
+			$this->jump("文章删除成功","?c=Article");
+		}else{
+			$this->jump("删除失败！请重试！！！","?c=Article");
+		}
+		
 	}
 
 	/**
@@ -131,9 +141,11 @@ final class ArticleController extends BaseController{
 		//stripslashes()
 		$data['orderby'] = $_POST['orderby'];
 		$data['top'] = isset($_POST['top'])?1:0;
-		$res = ArticleModel::getInstance()->update($data,$id);
-		if($res){
+		$flag = ArticleModel::getInstance()->update($data,$id);
+		if($flag){
 			$this->jump("修改成功","?c=Article");
+		}else{
+			$this->jump("操作失败！！请重试！","?c=Article");
 		}
 	}
 

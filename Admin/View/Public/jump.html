@@ -46,24 +46,29 @@
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
+			<script type="text/javascript">
+				function playSec(num){
+					var start_time = "";
+					var time_doc = document.getElementById("time");
+					if(time_doc != null){
+						time_doc.innerHTML = num;
+					}
+					
+					if(--num >0){
+						start_time = setTimeout("playSec("+num+")",1000);
+					}else{
+						//优先ajax验证 首页会返回false 不跳转页面
+						//如果加载了当前页面的方法 则返回true 跳转页面
+						if(loadContentFrame("<{$url}>")){
+							location.href="<{$url}>";
+							clearTimeout(start_time);
+						}		
+					}
+				}
+				playSec(<{$time}>);
+			</script>
 		<div>
 	</div>
-
-	<script type="text/javascript">
-		function playSec(num){
-			time.innerHTML = num;
-			if(--num >0){
-				setTimeout("playSec("+num+")",1000);
-			}else{
-				//优先ajax验证 首页会返回false 不跳转页面
-				//如果加载了当前页面的方法 则返回true 跳转页面
-				if(loadContentFrame("<{$url}>")){
-					location.href="<{$url}>";
-				}		
-			}
-		}
-		playSec(<{$time}>);
-	</script>
 <!-- END MAIN -->
 </body>
 <script type="text/javascript">

@@ -44,17 +44,18 @@ $(document).ready(function() {
 			$('.main').css('min-height', $('#sidebar-nav').height());
 		}
 	});
-
-
+	
 	/*-----------------------------------/
 	/*	SIDEBAR NAVIGATION
 	/*----------------------------------*/
 
 	$('.sidebar a[data-toggle="collapse"]').on('click', function() {
+		var $a = $(this);
 		if($(this).hasClass('collapsed')) {
 			$(this).addClass('active');
 		} else {
 			$(this).removeClass('active');
+			setTimeout(function (){$a.blur();},200);
 		}
 	});
 

@@ -73,7 +73,7 @@
 												<td><{$article.username}></td>
 												<td><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
 												<td>
-													<a href="?c=Article&a=edit&id=<{$article.id}>">修改</a> | 
+													<a href="?c=Article&a=edit&id=<{$article.id}>" onclick="loadContentFrame()">修改</a> | 
 													<a href="javascript:void(0)" onClick="confirmDel(<{$article.id}>)">删除</a>
 												</td>
 											</tr>
@@ -92,19 +92,19 @@
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
-		</div>
-		<script type="text/javascript">
-			//定义删除提示的方法
-			function confirmDel(id)
-			{
-				//询问是否删除
-				if(window.confirm("你确定要删除吗？"))
+			<script type="text/javascript">
+				//定义删除提示的方法
+				function confirmDel(id)
 				{
-					//首页异步加载数据
-					loadContentFrame("?c=Article&a=delete&id="+id);
+					//询问是否删除
+					if(window.confirm("你确定要删除吗？"))
+					{
+						//首页异步加载数据
+						loadContentFrame("?c=Article&a=delete&id="+id);
+					}
 				}
-			}
-		</script>
+			</script>
+		</div>
 		<!-- END MAIN -->
 	</div>
 </body>

@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 use \Frame\Libs\BaseController;
 use \Admin\Model\LinksModel;
+use \Frame\Vendor\Pager;
 final class LinksController extends BaseController{
 
 	/**
@@ -17,8 +18,31 @@ final class LinksController extends BaseController{
 	 * @DateTime 2017-05-06
 	 */
 	public function index(){
-		$links = LinksModel::getInstance()->fetchAll();
+		$this->denyAccess();
+		$where = "2>1";
+		$params = array(
+			'c' => 'Links',
+			'a' => 'index'
+			);
+		$pagesize = 10;
+		$page = isset($_GET['page'])?$_GET['page']:1;
+		$startrow = ($page-1)*$pagesize;
+		$orderby = " id desc";
+		if(!empty($_REQUEST['keyword'])){
+			$where .= " AND links.domain LIKE '%".$_REQUEST['keyword']."%'";
+			$where .= " OR links.url LIKE '%".$_REQUEST['keyword']."%'";
+			$params['keyword
+			'] = $_REQUEST['keyword'];
+		}
+		$records = LinksModel::getInstance()->rowCount($where);
+		//创建分页对象
+		$pageObj = new Pager($pagesize,$page,$records,$params);
+		$pageStr = $pageObj->showPageStr();
+
+
+		$links = LinksModel::getInstance()->fetchAll($where,$orderby,$startrow,$pagesize);
 		$this->smarty->assign("links",$links);
+		$this->smarty->assign("pageStr",$pageStr);
 		$this->smarty->display("index.html");
 	}
 

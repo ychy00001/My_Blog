@@ -1,50 +1,76 @@
-﻿<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<link href="./Public/Admin/Css/public.css" rel="stylesheet" type="text/css" />
-<title>友情链接管理</title>
+	<title>链接管理 | 添加连接</title>
 </head>
 
 <body>
-<table width="100%" border="0" align="center" cellpadding="1" cellspacing="1" class="border">
-	<tr class="topbg"><td>友情链接管理</td></tr>
-	<tr class="tdbg">
-		<td height="30">&nbsp;&nbsp;
-			<a href="?c=Links&a=index">管理首页</a>&nbsp;|&nbsp;
-			<a href="?c=Links&a=add">添加友情链接</a>
-		</td>
-	</tr>
-</table>
-<br />
-<form name="form1" method="post" action="?c=Links&a=insert">
-<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="border">
-	<tr class="title">
-		<td colspan="2" align="center">添加友情链接</td>
-	</tr>
-	<tr class="tdbg">
-		<td width="11%" height="30" align="right">域&nbsp;&nbsp;名：</td>
-		<td width="89%"><input name="domain" type="text" size="90" maxlength="50" /></td>
-	</tr>
-	<tr class="tdbg">
-		<td width="11%" height="30" align="right">网&nbsp;&nbsp;址：</td>
-		<td width="89%"><input name="url" type="text" size="90" maxlength="50" /></td>
-	</tr>
-	<tr class="tdbg">
-		<td height="30" align="right">排&nbsp;&nbsp;序：</td>
-		<td>
-			<input name="orderby" type="text" value="50" size="5" maxlength="5" /> 
-			数值数小，排序越靠前
-		</td>
-	</tr>
-	<tr class="tdbg">
-		<td height="30" align="right">&nbsp;</td>
-		<td>
-			<input type="submit" value="添加" />
-			<input type="button" onclick="history.go(-1)" value="返回" />
-		</td>
-	</tr>
-</table>
-</form>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">友情链接管理</h3>
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">添加友情链接</h3>
+								</div>
+								<div class="panel-body">
+									<form name="form1" class="form-inline" method="post" action="?c=Links&a=insert" onsubmit='loadContentFrame()'>
+										<table class="table table-hover">
+										<tbody>
+											<tr>
+												<div class="form-group">
+													<td height="30" align="right">域&ensp;&ensp;名：</td>
+													<td><input class="form-control" name="domain" type="text" size="90" maxlength="50" /></td>
+												</div>
+											</tr>
+											<tr>
+												<div class="form-group">
+													<td height="30" align="right">网&ensp;&ensp;址：</td>
+													<td><input class="form-control" name="url" type="text" size="90" maxlength="50" /></td>
+												</div>
+											</tr>
+											<tr>
+												<div class="form-group">
+													<td height="30" align="right">排&ensp;&ensp;序：</td>
+													<td>
+													<input class="form-control" name="orderby" type="text" value="50" size="2" maxlength="2" />
+													&nbsp;数值数小，排序越靠前
+													</td>
+												</div>
+											</tr>
+											<tr>
+												<div class="form-group">
+													<td height="30" align="right">&nbsp;</td>
+													<td>
+														<input class="btn btn-primary" type="submit" value="添加" 
+														/>
+														<input class="btn btn-warning" type="button" onclick="loadContentFrame('?c=Links')" value="返回" />
+													</td>
+												</div>
+											</tr>
+										</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+	</div>
 </body>
+
 </html>

@@ -11,6 +11,7 @@ namespace Admin\Controller;
 use \Frame\Libs\BaseController;
 use \Admin\Model\UserModel;
 use \Frame\Vendor\Captcha;
+use \Frame\Vendor\Pager;
 
 final class UserController extends BaseController{
 
@@ -21,10 +22,30 @@ final class UserController extends BaseController{
 	 */
 	public function index(){
 		$this->denyAccess();
+		$where = "2>1";
+		$params = array(
+			'c' => 'User',
+			'a' => 'index'
+			);
+		$pagesize = 10;
+		$page = isset($_GET['page'])?$_GET['page']:1;
+		$startrow = ($page-1)*$pagesize;
+		$orderby = " id desc";
+		if(!empty($_REQUEST['keyword'])){
+			$where .= " AND user.username LIKE '%".$_REQUEST['keyword']."%'";
+			$params['keyword
+			'] = $_REQUEST['keyword'];
+		}
+		$records = UserModel::getInstance()->rowCount($where);
+		//创建分页对象
+		$pageObj = new Pager($pagesize,$page,$records,$params);
+		$pageStr = $pageObj->showPageStr();
+
 		//获取所有用户信息
 		$modelObj = UserModel::getInstance();
-		$users = $modelObj->fetchAll();
+		$users = $modelObj->fetchAll($where,$orderby,$startrow,$pagesize);
 		$this->smarty->assign("users",$users);
+		$this->smarty->assign("pageStr",$pageStr);
 		$this->smarty->display("index.html");
 	}
 
@@ -38,9 +59,9 @@ final class UserController extends BaseController{
 		$id = $_GET['id'];
 		$modelObj = UserModel::getInstance();
 		if($modelObj->delete($id)){
-			$this->jump("id={$id}的用户删除成功","?c=User&a=index",1);
+			$this->jump("id={$id}的用户删除成功","?c=User&a=index");
 		}else{
-			$this->jump("id={$id}的用户删除失败","?c=User&a=index",1);
+			$this->jump("id={$id}的用户删除失败","?c=User&a=index");
 		}
 
 	}
@@ -75,12 +96,12 @@ final class UserController extends BaseController{
 		$data['password'] = md5($_POST['password']);
 		$data['name'] = $_POST['name'];
 		$data['tel'] = $_POST['tel'];
-		$data['status'] = $_POST['status'];
+		$data['status'] = isset($_POST['status'])?1:0;
 		$data['role'] = $_POST['role'];
 		$data['addate'] = time();
 		//写入数据
 		UserModel::getInstance()->insert($data);
-		$this->jump("{$_POST['username']}注册成功","?c=User",1);
+		$this->jump("{$_POST['username']}注册成功","?c=User",999);
 	}
 
 	/**

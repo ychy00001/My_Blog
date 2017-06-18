@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 use \Frame\Libs\BaseController;
 use \Admin\Model\CategoryModel;
+use \Frame\Vendor\Pager;
 
 final class CategoryController extends BaseController {
 
@@ -19,10 +20,31 @@ final class CategoryController extends BaseController {
 	 */
 	public function index(){
 		$this->denyAccess();
-		$categorys = CategoryModel::getInstance()->fetchAll();
+		$where = "2>1";
+		$params = array(
+			'c' => 'Article',
+			'a' => 'index'
+			);
+		$pagesize = 10;
+		$page = isset($_GET['page'])?$_GET['page']:1;
+		$startrow = ($page-1)*$pagesize;
+		$orderby = " id desc";
+		if(!empty($_REQUEST['keyword'])){
+			$where .= " AND category.classname LIKE '%".$_REQUEST['keyword']."%'";
+			$params['keyword
+			'] = $_REQUEST['keyword'];
+		}
+		$records = CategoryModel::getInstance()->rowCount($where);
+		//创建分页对象
+		$pageObj = new Pager($pagesize,$page,$records,$params);
+		$pageStr = $pageObj->showPageStr();
+
+
+		$categorys = CategoryModel::getInstance()->fetchAllWithJoin($where,$orderby,$startrow,$pagesize);
 		//调用层级显示方法
 		$categorys = CategoryModel::getInstance()->categoryLists($categorys);
 		$this->smarty->assign("categorys",$categorys);
+		$this->smarty->assign("pageStr",$pageStr);
 		$this->smarty->display("index.html");
 	}
 

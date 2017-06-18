@@ -4,6 +4,10 @@
 <head>
 	<title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
 	<meta charset="utf-8">
+	<meta name="keywords" content="博客,IT,个人博客,远方小镇" />
+	<meta name="description" content="IT个人博客" />
+    <meta name="author" content="Rain">
+
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- GOOGLE FONTS -->
@@ -46,7 +50,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
 								<i class="lnr lnr-alarm"></i>
-								<span class="badge bg-danger">3</span>
+								<span class="badge bg-danger"></span>
 							</a>
 							<ul class="dropdown-menu notifications">
 								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>bg-warning</a></li>
@@ -62,7 +66,7 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./Public/Admin/Images/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./Public/Admin/Images/user.png" class="img-circle" alt="Avatar"> <span><{$smarty.session.username}></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>个人</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
@@ -82,54 +86,52 @@
 		<div id="sidebar-nav" class="sidebar">
 			<div class="sidebar-scroll">
 				<nav>
-					<ul class="nav">
+					<ul class="nav" id="main_nav">
 						<li><a href="admin.php" class="active"><i class="lnr lnr-home"></i> <span>首页</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>文章管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#article" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>文章管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="article" class="collapse ">
 								<ul class="nav">
-									<li><a href='?c=Article&a=add' onClick="loadContentFrame()">添加文章</a></li>
-									<li><a href='?c=Article&a=index' onClick="loadContentFrame()">管理文章</a></li>
+									<li><a href='?c=Article&a=add' onClick="loadContentFrame()" class="sub_item">添加文章</a></li>
+									<li><a href='?c=Article&a=index' onClick="loadContentFrame()" class="sub_item">管理文章</a></li>
 								</ul>
 							</div>
 						</li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>分类管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#category" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>分类管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="category" class="collapse ">
 								<ul class="nav">
-									<li><a href='?c=Category&a=add'>添加分类</a></li>
-									<li><a href='?c=Category&a=index'>管理分类</a></li>
+									<li><a href='?c=Category&a=add' onClick="loadContentFrame()" class="sub_item">添加分类</a></li>
+									<li><a href='?c=Category&a=index' onClick="loadContentFrame()" class="sub_item">管理分类</a></li>
 								</ul>
 							</div>
 						</li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-alarm"></i> <span>评论管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#comment" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>文章评论</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="comment" class="collapse ">
 								<ul class="nav">
-									<li><a href='?c=Comment&a=index'>管理文章评论</a></li>
+									<li><a href='?c=Comment&a=index' onClick="loadContentFrame()"class="sub_item">管理文章评论</a></li>
 								</ul>
 							</div>
 						</li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-linearicons"></i> <span>友情链接</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#links" data-toggle="collapse" class="collapsed"><i class="lnr lnr-linearicons"></i> <span>友情链接</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="links" class="collapse ">
 								<ul class="nav">
-									<li><a href='?c=Links&a=add'>添加链接</a></li>
-									<li><a href='?c=Links&a=index'>管理链接</a></li>
+									<li><a href='?c=Links&a=add' onClick="loadContentFrame()" class="sub_item">添加链接</a></li>
+									<li><a href='?c=Links&a=index' onClick="loadContentFrame()" class="sub_item">管理链接</a></li>
 								</ul>
 							</div>
 						</li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>用户管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#usermanage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>用户管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="usermanage" class="collapse">
 								<ul class="nav">
-									<li><a href='?c=User&a=add'>添加用户</a></li>
-									<li><a href='?c=User&a=index'>用户管理</a></li>
+									<li><a href='?c=User&a=add'  onClick="loadContentFrame()"class="sub_item">添加用户</a></li>
+									<li><a href='?c=User&a=index' onClick="loadContentFrame()" class="sub_item">用户管理</a></li>
 								</ul>
 							</div>
 						</li>
-						<li><a href="index.html" class="active"><i class="lnr lnr-dice"></i> <span>测试</span></a></li>
-						<li><a href="index.html" class="active"><i class="lnr lnr-text-format"></i> <span>测试</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -220,88 +222,10 @@
 	<!-- kindEditor 编辑器脚本 -->
 	<script src="./Public/Admin/Js/editor/kindeditor-min.js" charset="utf-8"></script>
 	<script src="./Public/Admin/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
+	<!-- 页面切换动态异步加载js -->
+	<script type="text/javascript" src="./Public/Admin/Js/index_syn_load.js"></script>
 </body>
 <script type="text/javascript">
-	//ajax获取点击连接的数据 替换 .main中的内容
-	function loadContentFrame(event) {
-		//网络连接参数设置
-		var param = {
-			type:"get",
-			url:"",
-			data:"",
-			success:function(data){
-				var star_str = "<!-- MAIN -->";
-				var end_str = "<!-- END MAIN -->";
-				var start_index = data.indexOf(star_str);
-				var end_index = data.lastIndexOf(end_str);
-				var content = data.substring(start_index,end_index);
-				$(".main").replaceWith(content);
-				//存在textarea标签  进行渲染
-				if(content.indexOf("<textarea") !== -1){
-					//渲染Kind编辑器
-					initKindEditor();
-				}
-			}
-		};
 
-		//判断事件源
-		if((typeof event=='string') && event.constructor==String){
-			//说明event是一个url连接 （跳转连接）
-			param.type = "get";
-			param.url = event;
-		}else{
-			event = event ? event : window.event; 
-			var obj = event.srcElement ? event.srcElement : event.target; 
-			//这时obj就是触发事件的对象，可以使用它的各个属性 
-			//还可以将obj转换成jquery对象，方便选用其他元素 
-			var $obj = $(obj);
-			//如果是a标签
-			if($obj[0].localName == 'a'){
-				param.type = "get";
-				param.url = $obj.attr("href");
-			}else if($obj[0].localName == 'form'){
-				console.log($obj);
-				param.type = $obj[0].method;
-				//获取 www.xxx.com?action=xx&controll=xxx
-				var actionUrl = $obj[0].action;
-				var sub_flag = actionUrl.indexOf("?");
-				//截取字符串 获取?action=xx&controll=xxx ?c=Article&a=insert
-				param.url = actionUrl.substr(sub_flag,actionUrl.length);
-				if($obj[0].length > 1){
-					//循环添加url的参数
-					for(var i=0;i<$obj[0].length-1;i++){
-						param.data += $obj[0][i].name;
-						param.data += "=" + $obj[0][i].value +"&";
-					}
-					//category_id=1&title=testtest&orderby=50&top=0&=&content=&=添加
-					param.data = param.data.substr(0,param.data.length-1);
-					alert(param.data);
-				}
-			}
-		}
-		//请求网络
-		$.ajax(param);
-		//取消网页链接跳转
-		if((typeof event=='string') && event.constructor==String){
-			//事件源是url 连接
-			return false;
-		}else if (event && event.preventDefault) {
-			//事件源是点击事件
-			event.preventDefault();
-		} else {
-			//兼容ie
-			window.event.returnValue = false; 
-		}
-	}
-
-	//动态加载 KindEditor在线编辑器
-	function initKindEditor(){
-		$.getScript('./Public/Admin/Js/editor/kindeditor-min.js', function() {
-			$.getScript('./Public/Admin/Js/editor/lang/zh_CN.js', function() {
-				KindEditor.basePath = './Public/Admin/Js/editor/';
-				KindEditor.create('textarea[name="content"]');
-			});
-		});
-	}	
 </script>
 </html>

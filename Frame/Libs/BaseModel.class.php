@@ -57,8 +57,11 @@ abstract class BaseModel{
 	 * @DateTime 2017-05-05
 	 * @return   [Array]     [返回所有用户信息]
 	 */
-	public function fetchAll(){
-		$sql = "SELECT * FROM {$this->table} LIMIT 15";
+	public function fetchAll($where="2>1",$orderby="id desc",$startrow=0,$pagesize=10){
+		$sql = "SELECT * FROM {$this->table} ";
+		$sql .= " WHERE {$where}";
+		$sql .= " ORDER BY {$orderby}";
+		$sql .= " LIMIT {$startrow},{$pagesize}";
 		return $this->pdo->fetchAll($sql);
 	}
 
@@ -121,7 +124,6 @@ abstract class BaseModel{
 			$str .= "{$key}='$value',";
 		}
 		$str = rtrim($str,",");
-
 		$sql = "UPDATE {$this->table} set {$str} WHERE id={$id}";
 		return $this->pdo->exec($sql);
 	}
