@@ -60,6 +60,26 @@ class IndexController extends BaseController{
 
 		//获取文章级联查询内容
 		$articles = ArticleModel::getInstance()->fetchAllWithJoin($where,$orderby,$startrow,$pagesize);
+
+		//根据文章长度计算动态显示高度 未加px
+		//前端需要进行一定的添加
+		foreach ($articles as $key => $value) {
+			foreach ($value as $index => $content) {
+				if($index == 'content'){
+					$len = strlen($content);
+					if($len < 10000){
+						$articles[$key]['height'] = 160;
+					}else if($len >= 10000 && $len < 20000){
+						$articles[$key]['height'] = ($len/100)+60;
+					}else if($len >= 20000 && $len < 30000){
+						$articles[$key]['height'] = ($len/100);
+					}else{
+						$articles[$key]['height'] = 350;
+					}
+				}
+			}
+		}
+
 		$pageObj = new Pager($pagesize,$page,$records,$params);
 		//单个分页信息显示
         $pageMsgArr['pagePrevStr'] = $pageObj->showPrevStr();

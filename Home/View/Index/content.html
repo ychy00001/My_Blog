@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>远方小镇</title>
+<link rel="stylesheet" type="text/css" media="all" href="./Public/Home/Css/style.css" />
+<!-- 自适应页面 -->
+<link rel="stylesheet" type="text/css" href="./Public/Home/Css/media-queries.css" />
+
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all" />
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all" />
+<![endif]-->
+<script type="text/javascript" src="./Public/Home/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/retina.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/selectnav.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.backstretch.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.dcflickr.1.0.js"></script>
+
+<!-- kindEditor 编辑器样式及脚本 -->
+<link rel="stylesheet" href="./Public/Home/Js/editor/themes/default/default.css" />
+<link rel="stylesheet" href="./Public/Home/Js/editor/themes/blog_item/blog_item.css" />
+<script src="./Public/Home/Js/editor/kindeditor-min.js" charset="utf-8"></script>
+<script src="./Public/Home/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
+</head>
+<body class="single">
+<div class="scanlines"></div>
+
+<!-- Begin Header -->
+<div class="header-wrapper opacity">
+    <div class="header">
+        <!-- Begin Logo -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="./Public/Home/Images/logo.png" alt="" />
+            </a>
+        </div>
+        <!-- End Logo -->
+        <!-- Begin Menu -->
+        <div id="menu-wrapper">
+            <div id="menu" class="menu">
+                <ul id="tiny">
+                    <li class="active"><a href="?c=Index">博文</a>
+                        <ul>
+                            <li><a href="?c=Index">首页</a></li>
+                            <li><a href="#">推荐</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">联系我</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- End Menu -->
+    </div>
+</div>
+<!-- End Header -->
+
+<!-- Begin Wrapper -->
+<div class="wrapper"><!-- Begin Intro -->
+<div class="intro">让你害怕的不是未知的未来，而是不断重复着过去的错误。<br>
+—《源代码》</div>
+<ul class="social">
+    <li>
+        <a class="rss" href="#"></a>
+    </li>
+    <li>
+        <a class="facebook" href="#"></a>
+    </li>
+    <li>
+        <a class="twitter" href="#"></a>
+    </li>
+    <li>
+        <a class="pinterest" href="#"></a>
+    </li>
+    <li>
+        <a class="dribbble" href="#"></a>
+    </li>
+    <li>
+        <a class="flickr" href="#"></a>
+    </li>
+    <li>
+        <a class="linkedin" href="#"></a>
+    </li>
+</ul><!-- End Intro --> 
+
+<div align=center>
+<div style="width:960px; margin:0 auto; height:90px;">
+<script>
+(function() {
+    var s = "_" + Math.random().toString(36).slice(2);
+    document.write('<div id="' + s + '"></div>');
+    (window.slotbydup=window.slotbydup || []).push({
+        id: '730419',
+        container: s,
+        size: '960,90',
+        display: 'inlay-fix'
+    });
+})();
+</script>
+<!-- <script src="http://dup.baidustatic.com/js/os.js"></script> -->
+</div>
+</div>
+
+    <!-- Begin Main Image -->
+    <{if isset($article.image_title) && !empty($article.image_title)}>
+        <div class="main-image">
+            <div class="outer">
+                <span class="inset"><img src="style/images/art/post1-full.jpg" alt=""/></span>
+            </div>
+        </div>
+    <{/if}>
+    <!-- End Main Image -->
+
+    <!-- Begin Container -->
+    <div class="content">
+
+        <!-- Begin Post -->
+        <div class="post format-image box">
+
+            <div class="details">
+                <span class="icon-image"><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
+                <span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>" class="likeThis"><{$article.praise}></a></span>
+                <span class="comments"><a href="?c=Index&a=commments&id=<{$article['id']}>"><{$article.comment_count}></a></span>
+            </div>
+
+            <h1 class="title"><{$article.title}></h1>
+            <textarea  name="content<{$article.id}>" readonly="true" style="overflow: hidden;" >
+            <{$article.content}>
+            </textarea>
+            <script type="text/javascript">
+                //初始化编辑器
+                KindEditor.basePath = './Public/Home/Js/editor/';
+                // 根据后台给出的高度 设置
+                var editor = KindEditor.create('textarea[name="content<{$article.id}>"]',{
+                    items:[],
+                    themeType : 'blog_item',
+                    width:'100%',
+                    readonlyMode : true,
+                    resizeType:0,
+                    cssData: 'body{color: #b9b9b9;overflow:hidden;}',
+                    autoHeightMode : true,
+                });
+                var autoheight=editor.edit.doc.body.scrollHeight;//此处的editor为kindeditor  
+                editor.edit.setHeight(autoheight);  
+            </script>
+
+            <div class="tags"><a href="#"><{$article.classname}></a></div>
+
+            <div class="post-nav">
+                <span class="nav-prev"><a href="#">&larr; Rock Paper Scissors Lizard Spock</a></span>
+                <span class="nav-next"><a href="#">Charming Winter &rarr;</a></span>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <!-- End Post -->
+
+        <!-- Begin Comment Wrapper -->
+        <div id="comment-wrapper" class="box">
+
+            <!-- Begin Comments -->
+            <div id="comments">
+
+                <h3 id="comments-title">最近有三个评论</h3>
+
+                <ol id="singlecomments" class="commentlist">
+                    <li class="comment">
+                        <div class="comment">
+                            <div class="comment-author vcard user frame">
+                                <img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />
+                            </div>
+                            <div class="message">
+                                <span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
+                                <div class="info">
+                                    <h2>评论标题</h2>
+                                    <span class="meta">评论时间</span>
+                                </div>
+                                <div class="comment-body ">
+                                    <p>我是评论</p>
+                                </div>
+                                <span class="edit-link"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                </ol>
+            </div>
+            <!-- End Comments -->
+
+            <!-- Begin Form -->
+            <div id="comment-form" class="comment-form">
+
+                <div id="respond">
+                    <h3 id="reply-title">评论</h3>
+
+                    <form action="#" method="post" id="commentform">
+                        <p class="comment-form-author">
+                            <label for="author">昵称</label> <span class="required">*</span>
+                            <input id="author" name="author" type="text" value="" size="30" aria-required='true'/>
+                        </p>
+                        <p class="comment-form-email">
+                            <label for="email">邮箱</label> <span class="required">*</span>
+                            <input id="email" name="email" type="text" value="" size="30" aria-required='true'/>
+                        </p>
+                        <p class="comment-form-comment">
+                            <label for="comment">评论</label>
+                            <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                        </p>
+                        <p class="form-submit">
+                            <input name="submit" type="submit" id="submit" value="发表评论"/>
+                        </p>
+                    </form>
+                </div><!-- #respond -->
+
+            </div>
+            <!-- End Form -->
+
+
+        </div>
+        <!-- End Comment Wrapper -->
+
+    </div>
+    <!-- End Container -->
+
+    <!-- Begin Sidebar -->
+    <div class="sidebar box">
+        <div class="sidebox widget">
+            <h3 class="widget-title">Popular Posts</h3>
+            <ul class="post-list">
+                <li>
+                    <div class="frame">
+                        <!-- <a href="#"><img src="style/images/art/s1.jpg"/></a> -->
+                    </div>
+                    <div class="meta">
+                        <h6><a href="#">Charming Winter</a></h6>
+                        <em>28th Sep 2012</em>
+                    </div>
+                </li>
+                <li>
+                    <div class="frame">
+                        <!-- <a href="#"><img src="style/images/art/s2.jpg"/></a> -->
+                    </div>
+                    <div class="meta">
+                        <h6><a href="#">Trickling Stream</a></h6>
+                        <em>5th Sep 2012</em>
+                    </div>
+                </li>
+                <li>
+                    <div class="frame">
+                        <!-- <a href="#"><img src="style/images/art/s3.jpg"/></a> -->
+                    </div>
+                    <div class="meta">
+                        <h6><a href="#">Morning Glory</a></h6>
+                        <em>26th Sep 2012</em>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="sidebox widget">
+            <h3 class="widget-title">搜索</h3>
+            <form class="searchform" method="get" action="?c=Index&a=index">
+                <input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>
+            </form>
+        </div>
+
+        <div class="sidebox widget">
+            <h3 class="widget-title">分类</h3>
+            <ul>
+                <{foreach $categorys as $category}>
+                <li><a href="?category_id=<{$category.id}>"><{str_repeat('--',$category.level*2)}><{$category.classname}></a>(<{$category.article_num}>)
+                </li>
+                <{/foreach}>
+            </ul>
+        </div>
+    </div>
+    <!--End Sidebar -->
+    <div class="clear"></div>
+
+</div>
+<!-- End Wrapper -->
+
+<!-- Begin Footer -->
+<div class="footer-wrapper">
+    <div id="footer" class="four">
+        <div id="first" class="widget-area">
+            <div class="widget widget_search">
+                <h3 class="widget-title">文章搜索</h3>
+                <form class="searchform" method="get" action="?c=Index&a=index">
+                    <input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''"
+                           onBlur="this.value='请输入文章标题关键字'"/>
+                </form>
+            </div>
+
+        </div><!-- #first .widget-area -->
+
+        <div id="second" class="widget-area">
+            <div class="widget widget_archive">
+                <h3 class="widget-title">年份归档</h3>
+                <ul>
+                    <{foreach $datas as $data}>
+                    <li>
+                        <a href="?c=Index&a=index&date=<{$data.months}>"><{$data.months}></a>
+                        (<span><{$data.article_count}></span>)
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+        </div><!-- #second .widget-area -->
+
+        <div id="third" class="widget-area">
+            <div id="example-widget-3" class="widget example">
+                <h3 class="widget-title">热门博文</h3>
+                <ul class="post-list">
+                    <li>
+                        <!-- <div class="frame">
+                            <a href="#"><img src="./Public/Home/Images/art/s1.jpg" /></a>
+                        </div> -->
+                        <div class="meta">
+                            <h6><a href="#">Charming Winter</a></h6>
+                            <em>28th Sep 2012</em>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- 	<div class="frame">
+                                <a href="#"><img src="./Public/Home/Images/art/s2.jpg" /></a>
+                            </div> -->
+                        <div class="meta">
+                            <h6><a href="#">Trickling Stream</a></h6>
+                            <em>5th Sep 2012</em>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- <div class="frame">
+                            <a href="#"><img src="./Public/Home/Images/art/s3.jpg" /></a>
+                        </div> -->
+                        <div class="meta">
+                            <h6><a href="#">Morning Glory</a></h6>
+                            <em>26th Sep 2012</em>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div><!-- #third .widget-area -->
+
+        <div id="fourth" class="widget-area">
+            <div class="widget">
+                <h3 class="widget-title">友情连接</h3>
+                <ul class="flickr-feed">
+                    <{foreach $links as $link}>
+                    <li><a href="<{$link.url}>" target="_black"><{$link.domain}></a></li>
+                    <{/foreach}>
+                </ul>
+            </div>
+        </div><!-- #fourth .widget-area -->
+    </div>
+</div>
+<div class="site-generator-wrapper">
+    <div class="site-generator">京ICP备17029279号 &copy; Copyright 2017-2018 ychy0001.xin All rights reserved</div>
+</div>
+<!-- End Footer --> 
+<script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
+<script type="text/javascript">
+    $.backstretch("./Public/Home/Images/bg/1.jpg");
+</script>
+</body>
+</html>

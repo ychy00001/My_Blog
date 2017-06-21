@@ -23,9 +23,11 @@
 <script type="text/javascript" src="./Public/Home/Js/jquery.backstretch.min.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/jquery.dcflickr.1.0.js"></script>
 
-<script type="text/javascript">
-	$.backstretch("./Public/Home/Images/bg/1.jpg");
-</script>
+<!-- kindEditor 编辑器样式及脚本 -->
+<link rel="stylesheet" href="./Public/Home/Js/editor/themes/default/default.css" />
+<link rel="stylesheet" href="./Public/Home/Js/editor/themes/blog_item/blog_item.css" />
+<script src="./Public/Home/Js/editor/kindeditor-min.js" charset="utf-8"></script>
+<script src="./Public/Home/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
 </head>
 <body>
 <div class="scanlines"></div>
@@ -44,24 +46,13 @@
 		<div id="menu-wrapper">
 			<div id="menu" class="menu">
 				<ul id="tiny">
-					<li class="active"><a href="index.html">Blog</a>
+					<li class="active"><a href="?c=Index">博文</a>
 						<ul>
-							<li><a href="post.html">Blog Post</a></li>
+							<li><a href="?c=Index">首页</a></li>
+							<li><a href="#">推荐</a></li>
 						</ul>
 					</li>
-					<li><a href="page-with-sidebar.html">Pages</a>
-						<ul>
-							<li><a href="page-with-sidebar.html">Page With Sidebar</a></li>
-							<li><a href="full-width.html">Full Width</a></li>
-						</ul>
-					</li>
-					<li><a href="typography.html">Styles</a>
-						<ul>
-							<li><a href="typography.html">Typography</a></li>
-							<li><a href="columns.html">Columns</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="#">联系我</a></li>
 				</ul>
 			</div>
 		</div>
@@ -128,15 +119,34 @@
 
 				<{if isset($article.image_title) && !empty($article.image_title)}>
 					<div class="frame">
-						<a href="post.html">
-							<img src="./Public/Home/Images/art/post1.jpg" alt="" />
+						<a href="?c=Index&a=content&id=<{$article.id}>">
+							<img src="<{$article.image_title}>" alt="" />
 						</a>
 					</div>
 				<{/if}>
 				<h2 class="title">
 					<a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a>
 				</h2>
-				<{strip_tags($article.content)|truncate:1500:"..."}>
+				<textarea  name="content<{$article.id}>" readonly="true" style="overflow: hidden;" >
+				<{$article.content}>
+				</textarea>
+				<script type="text/javascript">
+					//初始化编辑器
+					KindEditor.basePath = './Public/Home/Js/editor/';
+					// 根据后台给出的高度 设置
+					var height = "<{$article.height}>px";
+					KindEditor.create('textarea[name="content<{$article.id}>"]',{
+						items:[],
+						themeType : 'blog_item',
+						width:'100%',
+						height:height,
+						readonlyMode : true,
+						resizeType:0,
+						cssData: 'body{color: #b9b9b9;overflow:hidden;}',
+						autoHeightMode : true,
+					});
+				</script>
+				<!-- <{strip_tags($article.content)|truncate:1500:"..."}> -->
 				<div class="details">
 					<span class="icon-standard"><a href="#"><{$article['addate']|date_format:'%Y-%m-%d- %H:%M:%S'}></a></span>
 					<span class="likes"><a href="#" class="likeThis"><{$article.praise}></a></span>
@@ -241,5 +251,8 @@
 </div>
 <!-- End Footer --> 
 <script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
+<script type="text/javascript">
+	$.backstretch("./Public/Home/Images/bg/1.jpg");
+</script>
 </body>
 </html>

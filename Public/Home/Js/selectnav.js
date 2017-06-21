@@ -10,7 +10,7 @@
 window.$ = jQuery;
 $(document).ready(function() {
 	selectnav('tiny', {
-		label: '--- Navigation --- ',
-		indent: '-'
+		label: '--- 导航栏 --- ',
+		indent: '*'
 	});
 });

@@ -1,0 +1,36 @@
+.ke-container-blog_item {
+	border: 0 none;
+    display: block;
+    background-color: rgba(0,0,0,0);
+    overflow: hidden;
+}
+.ke-container-blog_item .ke-toolbar {
+	border: 0 none;
+    background-color: rgba(0,0,0,0);
+    overflow: hidden;
+}
+
+/*移除最下面动作条*/
+.ke-statusbar-right-icon {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	cursor: se-resize;
+	width: 0;
+	height: 0;
+}
+.ke-statusbar-center-icon {
+	width: 0;
+	height: 0;
+}
+.ke-statusbar {
+	position: relative;
+	background-color: #F0F0EE;
+	border-top: 0;
+	font-size: 0;
+	line-height: 0;
+	*height: 0;
+	overflow: hidden;
+	text-align: center;
+	cursor: s-resize;
+}
