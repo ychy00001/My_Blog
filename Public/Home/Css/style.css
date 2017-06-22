@@ -819,7 +819,7 @@ iframe {
 }
 .post-nav {
     background: transparent url(../Images/line.png) center top repeat-x;
-    margin: 0 -5px;
+    margin: 0 -18px;
     overflow: hidden;
     position: relative;
     padding: 10px 0;
@@ -837,6 +837,15 @@ iframe {
 .post-nav .nav-next {
     float: right
 }
+.post-nav .nav-msg{
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    bottom: 30%;
+    top: 30%;
+    text-align: center;
+}
+
 .post-nav:after {
     content: '';
     display: block;
@@ -1552,4 +1561,38 @@ ul.flickr-feed li img {
     background: transparent url(../Images/line.png) repeat-x left top;
     margin: 0;
     padding: 15px 0 0 0;
+}
+
+/*博文列表*/
+.bloglist{padding:5px 20px;}
+.bloglist li{
+    overflow: hidden;
+    list-style: none;
+    height:30px;
+    line-height:30px;
+    padding-left:10px;
+    border-bottom:1px dotted #999;
+    background:url(../images/SG_dot.gif) no-repeat left center;
+}
+.bloglist li a{
+    display: inline-block;
+    color: #aaa;
+    width: 400px;
+    word-break:keep-all;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.bloglist li a:hover{
+    color: #ddd;
+    font-weight: 700;
+}
+.bloglist li>span{
+    float:right;
+    text-align: right;
+    width: 22%;
+    overflow: hidden;
+    color:#999;
+}
+.bloglist li .span1{
+    float: right;
 }

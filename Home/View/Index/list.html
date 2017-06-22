@@ -46,13 +46,13 @@
         <div id="menu-wrapper">
             <div id="menu" class="menu">
                 <ul id="tiny">
-                    <li><a href="?c=Index">首页</a>
+                    <li><a href="?c=Index">博文</a>
                        <!--  <ul>
                             <li><a href="?c=Index">首页</a></li>
                             <li><a href="#">推荐</a></li>
                         </ul> -->
                     </li>
-                    <li><a href="?c=Index&a=showList">博文列表</a></li>
+                    <li class="active"><a href="?c=Index&a=showList">博文列表</a></li>
                     <li><a href="#">联系我</a></li>
                 </ul>
             </div>
@@ -104,113 +104,29 @@
 <!-- Begin Container -->
 <div class="content">
 
-    <!-- Begin Post -->
+    <!-- Begin List -->
     <div class="post format-image box">
 
         <div class="details">
-            <span class="icon-image"><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
-            <span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>" class="likeThis"><{$article.praise}></a></span>
-            <span class="comments"><a href="?c=Index&a=commments&id=<{$article['id']}>"><{$article.comment_count}></a></span>
         </div>
 
-        <h1 class="title"><{$article.title}></h1>
-        <textarea  name="content<{$article.id}>" readonly="true" style="overflow: hidden;" >
-        <{$article.content}>
-        </textarea>
-        <script type="text/javascript">
-            //初始化编辑器
-            KindEditor.basePath = './Public/Home/Js/editor/';
-            // 根据后台给出的高度 设置
-            var editor = KindEditor.create('textarea[name="content<{$article.id}>"]',{
-                items:[],
-                themeType : 'blog_item',
-                width:'100%',
-                readonlyMode : true,
-                resizeType:0,
-                cssData: 'body{color: #b9b9b9;overflow:hidden;}',
-                autoHeightMode : true,
-            });
-            var autoheight=editor.edit.doc.body.scrollHeight;//此处的editor为kindeditor  
-            editor.edit.setHeight(autoheight);  
-            K('ul,li,ol,a,span').css('color','#B9B9B9');
-        </script>
-
-        <div class="tags"><a href="#"><{$article.classname}></a></div>
-
-        <div class="post-nav">
-            <span class="nav-prev"><a href="#">&larr; Rock Paper Scissors Lizard Spock</a></span>
-            <span class="nav-next"><a href="#">Charming Winter &rarr;</a></span>
+        <h1 class="title">博文列表</h1>
+        <div class="bloglist">
+            <ul>
+               <{foreach $articles as $article}>
+                <li><a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a><span>(<{$article.comment_count}>/<{$article.read}>)&ensp;&ensp;
+                <span class="span1"><{$article.addate|date_format:'%Y-%m-%d'}></span></span></li>
+                <{/foreach}>
+            </ul>
+        </div>
+         <div class="post-nav">
+            <span class="nav-prev"><{$pageMsgArr['pagePrevStr']}></span>
+            <span class='nav-msg'><{$pageMsgArr['pageMsgStr']}></span>
+            <span class="nav-next"><{$pageMsgArr['pageNextStr']}></span>
             <div class="clear"></div>
         </div>
-
     </div>
-    <!-- End Post -->
-
-    <!-- Begin Comment Wrapper -->
-    <div id="comment-wrapper" class="box">
-
-        <!-- Begin Comments -->
-        <div id="comments">
-
-            <h3 id="comments-title">最近有三个评论</h3>
-
-            <ol id="singlecomments" class="commentlist">
-                <li class="comment">
-                    <div class="comment">
-                        <div class="comment-author vcard user frame">
-                            <img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />
-                        </div>
-                        <div class="message">
-                            <span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
-                            <div class="info">
-                                <h2>评论标题</h2>
-                                <span class="meta">评论时间</span>
-                            </div>
-                            <div class="comment-body ">
-                                <p>我是评论</p>
-                            </div>
-                            <span class="edit-link"></span>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-            </ol>
-        </div>
-        <!-- End Comments -->
-
-        <!-- Begin Form -->
-        <div id="comment-form" class="comment-form">
-
-            <div id="respond">
-                <h3 id="reply-title">评论</h3>
-
-                <form action="#" method="post" id="commentform">
-                    <p class="comment-form-author">
-                        <label for="author">昵称</label> <span class="required">*</span>
-                        <input id="author" name="author" type="text" value="" size="30" aria-required='true'/>
-                    </p>
-                    <p class="comment-form-email">
-                        <label for="email">邮箱</label> <span class="required">*</span>
-                        <input id="email" name="email" type="text" value="" size="30" aria-required='true'/>
-                    </p>
-                    <p class="comment-form-comment">
-                        <label for="comment">评论</label>
-                        <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-                    </p>
-                    <p class="form-submit">
-                        <input name="submit" type="submit" id="submit" value="发表评论"/>
-                    </p>
-                </form>
-            </div><!-- #respond -->
-
-        </div>
-        <!-- End Form -->
-
-
-    </div>
-    <!-- End Comment Wrapper -->
-
+    <!-- End List -->
 </div>
 <!-- End Container -->
 
@@ -252,7 +168,7 @@
 
     <div class="sidebox widget">
         <h3 class="widget-title">搜索</h3>
-        <form class="searchform" method="get" action="?c=Index&a=index">
+        <form class="searchform" method="get" action="?c=Index&a=showList">
             <input type="hidden" name="c" value="Index">
             <input type="hidden" name="a" value="showList">
             <input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>

@@ -23,7 +23,7 @@
 	.single .audio {
 		width: 445px;
 	}
-	
+	.post-nav,
 	.content {
 		width: 640px;
 	}
@@ -56,7 +56,7 @@
 	.single .audio {
 		width: 275px;
 	}
-	
+	.post-nav,
 	.content {
 		width: 470px;
 	}
@@ -76,6 +76,7 @@
 	#footer,
 	.site-generator,
 	.content,
+	.post-nav,
 	.sidebar  {
 		width: 440px;
 	}
@@ -156,6 +157,7 @@
 	#footer,
 	.site-generator,
 	.content,
+	.post-nav,
 	.sidebar   {
 		width: 280px;
 	}
@@ -189,7 +191,7 @@
 		margin: 0 0 40px 0 !important;
 	}
 	
-	.content {
+	.post-nav,.content {
 		float: none;
 	}
 	

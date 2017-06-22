@@ -146,6 +146,10 @@ class IndexController extends BaseController{
 		//获取文章级联查询内容
 		$articles = ArticleModel::getInstance()->fetchAllWithJoin($where,$orderby,$startrow,$pagesize);
 		$pageObj = new Pager($pagesize,$page,$records,$params);
+		//单个分页信息显示
+        $pageMsgArr['pagePrevStr'] = $pageObj->showPrevStr();
+		$pageMsgArr['pageNextStr'] = $pageObj->showNextStr();
+		$pageMsgArr['pageMsgStr'] = $pageObj->showPagMsgStr();
 
 		$pageStr = $pageObj->showPageStr();
 		$this->smarty->assign(array(
@@ -154,6 +158,7 @@ class IndexController extends BaseController{
 			'datas' => $datas,
 			'articles' => $articles,
 			'pageStr' => $pageStr,
+			'pageMsgArr' => $pageMsgArr,
 			));
 
 		$this->smarty->display("list.html");

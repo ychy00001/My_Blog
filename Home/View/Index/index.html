@@ -46,12 +46,13 @@
 		<div id="menu-wrapper">
 			<div id="menu" class="menu">
 				<ul id="tiny">
-					<li class="active"><a href="?c=Index">博文</a>
-						<ul>
+					<li class="active"><a href="?c=Index">首页</a>
+						<!-- <ul>
 							<li><a href="?c=Index">首页</a></li>
 							<li><a href="#">推荐</a></li>
-						</ul>
+						</ul> -->
 					</li>
+					<li><a href="?c=Index&a=showList">博文列表</a></li>
 					<li><a href="#">联系我</a></li>
 				</ul>
 			</div>
@@ -90,24 +91,6 @@
 	</li>
 </ul><!-- End Intro --> 
 
-<div align=center>
-<div style="width:960px; margin:0 auto; height:90px;">
-<script>
-(function() {
-    var s = "_" + Math.random().toString(36).slice(2);
-    document.write('<div id="' + s + '"></div>');
-    (window.slotbydup=window.slotbydup || []).push({
-        id: '730419',
-        container: s,
-        size: '960,90',
-        display: 'inlay-fix'
-    });
-})();
-</script>
-<!-- <script src="http://dup.baidustatic.com/js/os.js"></script> -->
-</div>
-</div>
-
 <!-- Begin Blog Grid -->
 <div class="blog-wrap">
 	<!-- Begin Blog -->
@@ -142,9 +125,10 @@
 						height:height,
 						readonlyMode : true,
 						resizeType:0,
-						cssData: 'body{color: #b9b9b9;overflow:hidden;}',
+						cssData: 'body{color: #b9b9b9;overflow:hidden;} ul,li,ol,a,span{color:#b9b9b9;}',
 						autoHeightMode : true,
 					});
+					K('ul,li,ol,a,span').css('color','#B9B9B9');
 				</script>
 				<!-- <{strip_tags($article.content)|truncate:1500:"..."}> -->
 				<div class="details">
@@ -177,7 +161,9 @@
 		<div id="first" class="widget-area">
 			<div class="widget widget_search">
 				<h3 class="widget-title">文章搜索</h3>
-				<form class="searchform" method="get" action="?c=Index&a=index">
+				<form class="searchform" method="get" action="?c=Index&a=showList">
+					<input type="hidden" name="c" value="Index">
+					<input type="hidden" name="a" value="showList">
 					<input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>
 				</form>
 			</div>
