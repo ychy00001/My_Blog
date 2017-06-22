@@ -128,12 +128,11 @@
 						cssData: 'body{color: #b9b9b9;overflow:hidden;} ul,li,ol,a,span{color:#b9b9b9;}',
 						autoHeightMode : true,
 					});
-					K('ul,li,ol,a,span').css('color','#B9B9B9');
 				</script>
 				<!-- <{strip_tags($article.content)|truncate:1500:"..."}> -->
 				<div class="details">
-					<span class="icon-standard"><a href="#"><{$article['addate']|date_format:'%Y-%m-%d- %H:%M:%S'}></a></span>
-					<span class="likes"><a href="#" class="likeThis"><{$article.praise}></a></span>
+					<span class="icon-standard"><a href="#"><{$article['addate']|date_format:'%Y-%m-%d %H:%M:%S'}></a></span>
+					<span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>&addr=<{$smarty.server.SERVER_ADDR}>" class="likeThis" onclick="addPraise()"><{$article.praise}></a></span>
 					<span class="comments"><a href="#"><{$article.comment_count}></a></span>
 				</div>
 			</div>
@@ -238,6 +237,7 @@
 <!-- End Footer --> 
 <script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
 <script type="text/javascript">
+	$('ul,li,ol,span').css('color','#B9B9B9');
 	$.backstretch("./Public/Home/Images/bg/1.jpg");
 </script>
 </body>

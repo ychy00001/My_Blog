@@ -109,8 +109,8 @@
 
         <div class="details">
             <span class="icon-image"><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
-            <span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>" class="likeThis"><{$article.praise}></a></span>
-            <span class="comments"><a href="?c=Index&a=commments&id=<{$article['id']}>"><{$article.comment_count}></a></span>
+            <span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>&addr=<{$smarty.server.SERVER_ADDR}>" onclick="addPraise()" class="likeThis"><{$article.praise}></a></span>
+            <span class="comments"><a href="?c=Index&a=commments&addr=<{$smarty.server.SERVER_ADDR}>"><{$article.comment_count}></a></span>
         </div>
 
         <h1 class="title"><{$article.title}></h1>
@@ -132,7 +132,6 @@
             });
             var autoheight=editor.edit.doc.body.scrollHeight;//此处的editor为kindeditor  
             editor.edit.setHeight(autoheight);  
-            K('ul,li,ol,a,span').css('color','#B9B9B9');
         </script>
 
         <div class="tags"><a href="#"><{$article.classname}></a></div>
@@ -152,7 +151,7 @@
         <!-- Begin Comments -->
         <div id="comments">
 
-            <h3 id="comments-title">最近有三个评论</h3>
+            <h3 id="comments-title">共有<{$article.comment_count}>个评论</h3>
 
             <ol id="singlecomments" class="commentlist">
                 <li class="comment">
@@ -359,6 +358,7 @@
 <script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
 <script type="text/javascript">
     $.backstretch("./Public/Home/Images/bg/1.jpg");
+     $('ul,li,ol,span').css('color','#B9B9B9');
 </script>
 </body>
 </html>

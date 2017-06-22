@@ -81,3 +81,45 @@ ddsmoothmenu.init({
 	classname: 'menu',
 	contentsource: "markup"
 })
+
+// 点赞
+function addPraise(event){
+    event = event ? event : window.event; 
+    var obj = event.srcElement ? event.srcElement : event.target; 
+    var $obj = $(obj);
+
+    //网络连接参数设置
+    var param = {
+        type:"get",
+        url:"",
+        data:"",
+        dataType: "json",
+        success:function(data){
+           if(data.result == 'success'){
+                var num = $obj.text();
+                $obj.text(parseInt(num)+1);
+           }else{
+                //提示错误
+                alert(data.msg);
+           }
+        }
+    };
+   
+    //如果是a标签
+    param.type = "get";
+    param.url = $obj.attr("href");
+    $.ajax(param);
+    disableEvent(event);
+}
+function disableEvent(event){
+    if((typeof event=='string') && event.constructor==String){
+        //事件源是url 连接
+        return false;
+    }else if (event && event.preventDefault) {
+        //事件源是点击事件
+        event.preventDefault();
+    } else {
+        //兼容ie
+        window.event.returnValue = false; 
+    }
+}

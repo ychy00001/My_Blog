@@ -203,18 +203,26 @@ class IndexController extends BaseController{
 	 * @DateTime 2017-05-08
 	 */
 	public function praise(){
-		if(isset($_SESSION['username'])){
-			$id = $_GET['id'];
-			if(!isset($_SESSION['praise']) || $_SESSION['praise'][$id] != 1){
-				ArticleModel::getInstance()->updatePriaise($id);
-						$_SESSION['praise'][$id] = 1;
-				//跳到来的页面
-				$this->jump("id={$id}的文章点赞成功!","?c=Index&a=content&id={$id}");
+		$addr = $_GET['addr'];
+		$id = $_GET['id'];
+		if(!isset($_SESSION['praise']) || $_SESSION['praise'][$addr] != $id){
+			$res = ArticleModel::getInstance()->updatePriaise($id);
+			if($res){
+				$_SESSION['praise'][$addr] = $id;
+				echo json_encode(array(
+					'result'=>'success'
+				));
 			}else{
-				$this->jump("id={$id}的文章你已经点赞过了","?c=Index&a=content&id={$id}");
+				echo json_encode(array(
+					'result'=>'fail',
+					'msg'=>'点赞失败,请重试'
+				));
 			}
 		}else{
-			$this->jump("只有登陆用户才能点赞","admin.php?c=User&a=login");
+			echo json_encode(array(
+				'result'=>'fail',
+				'msg'=>'已经点过赞了'
+			));
 		}
 	}
 
