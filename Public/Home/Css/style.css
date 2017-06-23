@@ -1596,3 +1596,8 @@ ul.flickr-feed li img {
 .bloglist li .span1{
     float: right;
 }
+
+/*博文内容*/
+.post_content{
+    overflow: hidden;
+}

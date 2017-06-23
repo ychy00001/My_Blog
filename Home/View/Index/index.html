@@ -110,24 +110,12 @@
 				<h2 class="title">
 					<a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a>
 				</h2>
-				<textarea  name="content<{$article.id}>" readonly="true" style="overflow: hidden;" >
-				<{$article.content}>
-				</textarea>
+				<div class="post_content" name="content<{$article.id}>">
+					<{$article.content}>
+				</div>
 				<script type="text/javascript">
-					//初始化编辑器
-					KindEditor.basePath = './Public/Home/Js/editor/';
 					// 根据后台给出的高度 设置
-					var height = "<{$article.height}>px";
-					KindEditor.create('textarea[name="content<{$article.id}>"]',{
-						items:[],
-						themeType : 'blog_item',
-						width:'100%',
-						height:height,
-						readonlyMode : true,
-						resizeType:0,
-						cssData: 'body{color: #b9b9b9;overflow:hidden;} ul,li,ol,a,span{color:#b9b9b9;}',
-						autoHeightMode : true,
-					});
+					$("[name='content<{$article.id}>']").height(<{$article.height}>);
 				</script>
 				<!-- <{strip_tags($article.content)|truncate:1500:"..."}> -->
 				<div class="details">

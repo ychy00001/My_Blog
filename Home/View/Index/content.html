@@ -114,25 +114,9 @@
         </div>
 
         <h1 class="title"><{$article.title}></h1>
-        <textarea  name="content<{$article.id}>" readonly="true" style="overflow: hidden;" >
-        <{$article.content}>
-        </textarea>
-        <script type="text/javascript">
-            //初始化编辑器
-            KindEditor.basePath = './Public/Home/Js/editor/';
-            // 根据后台给出的高度 设置
-            var editor = KindEditor.create('textarea[name="content<{$article.id}>"]',{
-                items:[],
-                themeType : 'blog_item',
-                width:'100%',
-                readonlyMode : true,
-                resizeType:0,
-                cssData: 'body{color: #b9b9b9;overflow:hidden;}',
-                autoHeightMode : true,
-            });
-            var autoheight=editor.edit.doc.body.scrollHeight;//此处的editor为kindeditor  
-            editor.edit.setHeight(autoheight);  
-        </script>
+        <div class="post_content" name="content<{$article.id}>">
+            <{$article.content}>
+        </div>
 
         <div class="tags"><a href="#"><{$article.classname}></a></div>
 
@@ -157,7 +141,7 @@
                 <li class="comment">
                     <div class="comment">
                         <div class="comment-author vcard user frame">
-                            <img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />
+                            <!-- <img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' /> -->
                         </div>
                         <div class="message">
                             <span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
