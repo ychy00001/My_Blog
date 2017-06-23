@@ -16,18 +16,12 @@
 <![endif]-->
 <script type="text/javascript" src="./Public/Home/Js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/ddsmoothmenu.js"></script>
-<script type="text/javascript" src="./Public/Home/Js/retina.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/jquery.fitvids.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/selectnav.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/jquery.masonry.min.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/jquery.backstretch.min.js"></script>
 <script type="text/javascript" src="./Public/Home/Js/jquery.dcflickr.1.0.js"></script>
 
-<!-- kindEditor 编辑器样式及脚本 -->
-<link rel="stylesheet" href="./Public/Home/Js/editor/themes/default/default.css" />
-<link rel="stylesheet" href="./Public/Home/Js/editor/themes/blog_item/blog_item.css" />
-<script src="./Public/Home/Js/editor/kindeditor-min.js" charset="utf-8"></script>
-<script src="./Public/Home/Js/editor/lang/zh_CN.js" charset="utf-8"></script>
 </head>
 <body class="single">
 <div class="scanlines"></div>
@@ -121,8 +115,20 @@
         <div class="tags"><a href="#"><{$article.classname}></a></div>
 
         <div class="post-nav">
-            <span class="nav-prev"><a href="#">&larr; Rock Paper Scissors Lizard Spock</a></span>
-            <span class="nav-next"><a href="#">Charming Winter &rarr;</a></span>
+            <span class="nav-prev">
+                <{if $pageArr[0]}>
+                    <a href="?c=Index&a=content&id=<{$pageArr[0]['id']}>">&larr;<{$pageArr[0]['title']}></a>
+                <{else}>
+                    没有啦！
+                <{/if}>
+            </span>
+            <span class="nav-next">
+                <{if $pageArr[1]}>
+                    <a href="?c=Index&a=content&id=<{$pageArr[1]['id']}>"><{$pageArr[1]['title']}>&rarr;</a>
+                <{else}>
+                    没有啦！
+                <{/if}>
+            </span>
             <div class="clear"></div>
         </div>
 
@@ -138,26 +144,53 @@
             <h3 id="comments-title">共有<{$article.comment_count}>个评论</h3>
 
             <ol id="singlecomments" class="commentlist">
+            <{foreach $comments as $comment}>
                 <li class="comment">
                     <div class="comment">
                         <div class="comment-author vcard user frame">
-                            <!-- <img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' /> -->
+                            <img alt="头像" src='./Public/Home/Images/head.png' class='avatar avatar-70 photo' height='70' width='70' />
                         </div>
                         <div class="message">
-                            <span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
+                            <span class="reply-link"><a class="comment-reply-link" href="javascript:void(0)" onclick="document.comment.pid.value=<{$comment.id}>">回复</a></span>
                             <div class="info">
-                                <h2>评论标题</h2>
-                                <span class="meta">评论时间</span>
+                                <h2><{$comment.username}></h2>
+                                <span class="meta"><{$comment.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
                             </div>
                             <div class="comment-body ">
-                                <p>我是评论</p>
+                                <p><{$comment.content}></p>
                             </div>
                             <span class="edit-link"></span>
                         </div>
                         <div class="clear"></div>
                     </div>
                     <div class="clear"></div>
+                    <{if $comment.son}>
+                    <ul class='children'>
+                         <{foreach $comment.son as $son}>
+                        <li class="comment even depth-2" id="li-comment-5">
+                            <div id="comment-5" class="com-wrap">
+                                <div class="comment-author vcard user frame">
+                                    <img alt='' src='./Public/Home/Images/head.png' class='avatar avatar-70 photo' height='70' width='70' />           </div><!-- .comment-author .vcard -->
+                                <div class="message">
+                                    <span class="reply-link"><a class='comment-reply-link' href='/obscura-wp/morning-glory/?replytocom=5#respond' onclick='return addComment.moveForm("comment-5", "5", "respond", "16")'>回复</a></span>
+                                    <div class="info">
+                                        <h2><{$son.username}></h2> 
+                                         <span class="meta"><{$son.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
+                                    </div>
+                                    <div class="comment-body ">
+                                        <p><{$son.content}></p>
+                                    </div>
+                                    <span class="edit-link"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div><!-- #comment-##  -->
+                            <div class="clear"></div>
+                        </li>
+                        <{/foreach}>
+                    </ul>
+                    <{/if}>
                 </li>
+                <{/foreach}>
             </ol>
         </div>
         <!-- End Comments -->
@@ -168,19 +201,17 @@
             <div id="respond">
                 <h3 id="reply-title">评论</h3>
 
-                <form action="#" method="post" id="commentform">
+                <form  name="comment" action="?c=Index&a=send" method="post" id="commentform">
                     <p class="comment-form-author">
                         <label for="author">昵称</label> <span class="required">*</span>
                         <input id="author" name="author" type="text" value="" size="30" aria-required='true'/>
-                    </p>
-                    <p class="comment-form-email">
-                        <label for="email">邮箱</label> <span class="required">*</span>
-                        <input id="email" name="email" type="text" value="" size="30" aria-required='true'/>
                     </p>
                     <p class="comment-form-comment">
                         <label for="comment">评论</label>
                         <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
                     </p>
+                    <input type="hidden" name="article_id" value="<{$article.id}>">
+                    <input type="hidden" name="pid" value="0">
                     <p class="form-submit">
                         <input name="submit" type="submit" id="submit" value="发表评论"/>
                     </p>

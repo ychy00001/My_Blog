@@ -1,71 +1,94 @@
-﻿<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<link href="./Public/Admin/Css/public.css" rel="stylesheet" type="text/css" />
-<title>文章评论管理</title>
-<script type="text/javascript">
-//定义删除提示的方法
-function confirmDel(id)
-{
-	//询问是否删除
-	if(window.confirm("你确定要删除吗？"))
-	{
-		//跳转到当前控制器，并传递参数
-		location.href = "?c=Comment&a=delete&id="+id;
-	}
-}
-</script>
+	<title>评论管理 | 评论列表</title>
 </head>
 
 <body>
-<!--导航栏-->
-<table width="100%" border="0" align="center" cellpadding="1" cellspacing="1" class="border">
-	<tr class="topbg"><td>文章评论管理</td></tr>
-	<tr class="tdbg">
-		<td height="30">&nbsp;&nbsp;
-			<a href="?c=Comment&a=index">管理首页</a>&nbsp;|&nbsp;
-			<a href="javascript:void(0)">添加文章评论</a>
-		</td>
-	</tr>
-</table>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">评论管理</h3>
 
-<!--搜索表单-->
-<div style="padding:8px 5px;margin:8px 3px;background-color:#fefefe;text-align:center;">
-<form name="form1" method="post" action="#">
-	<input type="text" name="keyword" style="width:300px;" />
-	<input type="submit" value="搜索" />
-	<input type="hidden" name="ac" value="search" />
-</form>
-</div>
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">评论详情</h3>
+								</div>
+								<div class="panel-body">
+									<form class="form-inline" method="post" action="?c=Comment&a=index" onsubmit='loadContentFrame()'>
+										<div class="form-group">
+											<div class="input-group">
+												<input class="form-control" name="keyword" type="text" placeholder="请输入文章标题关键字"
+												<{if !empty($smarty.request.keyword)}>
+													value="<{$smarty.request.keyword}>"
+												<{/if}>
+												>
+												<span class="input-group-btn" ><input type="submit" class="btn btn-primary" type="button" value="Go!"></span>
+											</div>
+										</div>
+									</form>
 
-<!--文章列表-->
-<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="border">
-<tr class="title" align="center">
-	<td>编号</td>
-	<td>上层评论内容</td>
-	<td>用户</td>
-	<td>评论内容</td>
-	<td>文章标题</td>
-	<td>评论时间</td>
-	<td>操作选项</td>
-</tr>
-<{foreach $comments as $comment}>
-<tr class="tdbg" align="center">
-	<td><{$comment.id}></td>
-	<td align="left"><{$comment.parent_content}></td>
-	<td><{$comment.username}></td>
-	<td align="left"><{$comment.content}></td>
-	<td align="left"><{$comment.title}></td>
-	<td><{$comment.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
-	<td><a href="javascript:void(0)" onclick="confirmDel(<{$comment.id}>)">删除</a></td>
-</tr>
-<{/foreach}>
-<!--评论分页-->
-<tr class="tdbg">
-	<td colspan="7" align="center">评论分页</td>
-</tr>
-
-</table>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>编号</th>
+												<th>上层评论内容</th>
+												<th>用户</th>
+												<th>评论内容</th>
+												<th>文章标题</th>
+												<th>评论时间</th>
+												<th>操作选项</th>
+											</tr>
+										</thead>
+										<tbody>
+											<{foreach $comments as $comment}>
+											<tr class="tdbg" align="center">
+											<td><{$comment.id}></td>
+											<td align="left"><{$comment.parent_content|truncate:15:'...'}></td>
+											<td><{$comment.username}></td>
+											<td align="left"><{$comment.content|truncate:15:'...'}></td>
+											<td align="left"><{$comment.title|truncate:20:'...'}></td>
+											<td><{$comment.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+											<td><a href="javascript:void(0)" onclick="confirmDel(<{$comment.id}>)">删除</a></td>
+											</tr>
+											<{/foreach}>
+											<!--文章分页-->
+											<tr class="tdbg">
+												<td colspan="7" align="center"><{$pageStr}></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+			<script type="text/javascript">
+				//定义删除提示的方法
+				function confirmDel(id)
+				{
+					//询问是否删除
+					if(window.confirm("你确定要删除吗？"))
+					{
+						//首页异步加载数据
+						loadContentFrame("?c=Comment&a=delete&id="+id);
+					}
+				}
+			</script>
+		</div>
+		<!-- END MAIN -->
+	</div>
 </body>
+
 </html>

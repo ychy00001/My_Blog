@@ -12,6 +12,7 @@ use \Frame\Libs\BaseController;
 use \Home\Model\LinksModel;
 use \Home\Model\CategoryModel;
 use \Home\Model\ArticleModel;
+use \Home\Model\CommentModel;
 use \Frame\Vendor\Pager;
 
 class IndexController extends BaseController{
@@ -86,6 +87,7 @@ class IndexController extends BaseController{
 		$pageMsgArr['pageNextStr'] = $pageObj->showNextStr();
 		$pageMsgArr['pageMsgStr'] = $pageObj->showPagMsgStr();
 		$pageStr = $pageObj->showPageStr();
+
 		$this->smarty->assign(array(
 			'links' => $links,
 			'categorys' => $categorys,
@@ -187,12 +189,23 @@ class IndexController extends BaseController{
 		$prevNext[] = ArticleModel::getInstance()->fetchOne("id<$id","id desc");
 		$prevNext[] = ArticleModel::getInstance()->fetchOne("id>$id");
 
+			//获取上一篇和下一篇
+		$pageArr[] = ArticleModel::getInstance()->fetchOne("id>$id");//后一篇
+		$pageArr[] = ArticleModel::getInstance()->fetchOne("id<$id");//前一篇
+
+		//显示评论数据
+		$comments = CommentModel::getInstance()->commentList(
+			CommentModel::getInstance()->fetchAllWithJoin("article_id=$id")
+		);
+		
 		$this->smarty->assign(array(
-			'article' => $article,
-			'links' => $links,
+			'article'   => $article,
+			'links'     => $links,
 			'categorys' => $categorys,
-			'datas' => $datas,
-			'prevNext' => $prevNext,
+			'datas'     => $datas,
+			'prevNext'  => $prevNext,
+			'pageArr'	=> $pageArr,
+			'comments'	=> $comments,
 			));
 		$this->smarty->display("content.html");
 	}

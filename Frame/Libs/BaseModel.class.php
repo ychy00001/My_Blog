@@ -46,8 +46,10 @@ abstract class BaseModel{
 	 * @param    [integer]     $id [模型编号]
 	 * @return   [array]         [模型数据关联数组]
 	 */
-	public function fetchOne($where="2>1"){
-		$sql = "SELECT * FROM {$this->table} where {$where} LIMIT 1";
+	public function fetchOne($where="2>1",$orderby="id desc"){
+		$sql = "SELECT * FROM {$this->table} where {$where} ";
+		$sql .= " ORDER BY {$orderby}";
+		$sql .= " LIMIT 1";
 		return $this->pdo->fetchOne($sql);
 	}
 
