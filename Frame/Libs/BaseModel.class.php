@@ -37,6 +37,98 @@ abstract class BaseModel{
 		return self::$modelObjArr[$modelClassName];
 	}
 
+	/*************数据库操作*****************/
+
+	/**
+	 * 获取一行模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [integer]     $id [模型编号]
+	 * @return   [array]         [模型数据关联数组]
+	 */
+	public function fetchOne($where="2>1",$orderby="id desc"){
+		$sql = "SELECT * FROM {$this->table} where {$where} ";
+		$sql .= " ORDER BY {$orderby}";
+		$sql .= " LIMIT 1";
+		return $this->pdo->fetchOne($sql);
+	}
+
+	/**
+	 * 获取所有模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @return   [Array]     [返回所有用户信息]
+	 */
+	public function fetchAll($where="2>1",$orderby="id desc",$startrow=0,$pagesize=10){
+		$sql = "SELECT * FROM {$this->table} ";
+		$sql .= " WHERE {$where}";
+		$sql .= " ORDER BY {$orderby}";
+		$sql .= " LIMIT {$startrow},{$pagesize}";
+		return $this->pdo->fetchAll($sql);
+	}
+
+	/**
+	 * 删除模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [integer]     $id [用户编号]
+	 * @return   [boolean]         [是否删除成功]
+	 */
+	public function delete($id){
+		$sql = "DELETE FROM {$this->table} WHERE id = {$id}";
+		return $this->pdo->exec($sql);
+	}
+
+	/**
+	 * 插入模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [Array]     $data [要插入的数据集合]
+	 * @return   [boolean]         [是否删除成功]
+	 */
+	public function insert($data){
+		$fields = "";
+		$values = "";
+		foreach ($data as $key => $value) {
+			$fields .= "$key,";
+			$values .= "'$value',";
+		}
+		$fields = rtrim($fields,",");
+		$values = rtrim($values,",");
+		//构建插入sql语句
+		$sql = "INSERT INTO {$this->table}($fields) VALUES($values) ";
+		return $this->pdo->exec($sql);
+	}
+
+	/**
+	 * 获取行数
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [String]     $where [查询条件]
+	 * @return   [integer]            [行数]
+	 */
+	public function rowCount($where){
+		$sql = "SELECT * FROM {$this->table} WHERE $where";
+		return $this->pdo->rowCount($sql);
+	}
+
+	/**
+	 * 更新模型数据
+	 * @Author   Rain
+	 * @DateTime 2017-05-05
+	 * @param    [array]     $data [更新字段集合]
+	 * @param    [integer]     $id   [更新条目编号]
+	 * @return   [boolean]           [更新成功/失败]
+	 */
+	public function update($data,$id){
+		$str = "";
+		foreach ($data as $key => $value) {
+			$str .= "{$key}='$value',";
+		}
+		$str = rtrim($str,",");
+		$sql = "UPDATE {$this->table} set {$str} WHERE id={$id}";
+		return $this->pdo->exec($sql);
+	}
 
 }
 

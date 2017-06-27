@@ -1,84 +1,112 @@
-﻿<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<link href="./Public/Admin/Css/public.css" rel="stylesheet" type="text/css" />
-<title>文章管理</title>
-<script type="text/javascript">
-//定义删除提示的方法
-function confirmDel(id)
-{
-	//询问是否删除
-	if(window.confirm("你确定要删除吗？"))
-	{
-		//跳转到当前控制器，并传递参数
-		location.href = "?c=Article&a=delete&id="+id;
-	}
-}
-</script>
+	<title>文章管理 | 文章列表</title>
 </head>
 
 <body>
-<!--导航栏-->
-<table width="100%" border="0" align="center" cellpadding="1" cellspacing="1" class="border">
-	<tr class="topbg"><td>文章管理</td></tr>
-	<tr class="tdbg">
-		<td height="30">&nbsp;&nbsp;
-			<a href="?c=Article&a=index">管理首页</a>&nbsp;|&nbsp;
-			<a href="?c=Article&a=add">添加文章</a>
-		</td>
-	</tr>
-</table>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">文章管理</h3>
 
-<!--搜索表单-->
-<div style="padding:8px 5px;margin:8px 3px;background-color:#fefefe;text-align:center;">
-<form name="form1" method="post" action="?c=Article&a=index">
-	<span style="padding:0px 5px;">分类</span>
-	<select name="category_id">
-		<option value="">任意</option>
-		<{foreach $categorys as $category}>
-		<option value="<{$category.id}>">
-			<{str_repeat('--',$category.level*4)}>
-			<{$category.classname}>
-		</option>
-		<{/foreach}>
-	</select>
-	<span style="padding:0px 5px;">标题</span>
-	<input type="text" name="keyword" />
-	<input type="submit" value="搜索" />
-	<input type="hidden" name="ac" value="search" />
-</form>
-</div>
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">文章详情</h3>
+								</div>
+								<div class="panel-body">
+									<form class="form-inline" method="post" action="?c=Article&a=index" onsubmit='loadContentFrame()'>
+										<div class="form-group">
+											<select class="form-control" name="category_id">
+												<option value="">文章分类</option>
+												<{foreach $categorys as $category}>
+												<option value="<{$category.id}>"
+												<{if !empty($smarty.request.category_id) and $smarty.request.category_id eq $category['id']}>
+													selected
+												<{/if}>
+												>
+													<{str_repeat('-',$category.level*4)}>
+													<{$category.classname}>
+												</option>
+												<{/foreach}>
+											</select>
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<input class="form-control" name="keyword" type="text" placeholder="请输入文章标题关键字"
+												<{if !empty($smarty.request.keyword)}>
+													value="<{$smarty.request.keyword}>"
+												<{/if}>
+												>
+												<span class="input-group-btn" ><input type="submit" class="btn btn-primary" type="button" value="Go!"></span>
+											</div>
+										</div>
+									</form>
 
-<!--文章列表-->
-<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="border">
-<tr class="title" align="center">
-	<td>编号</td>
-	<td>分类</td>
-	<td>标题</td>
-	<td>作者</td>
-	<td>发布时间</td>
-	<td>操作选项</td>
-</tr>
-<{foreach $articles as $article}>
-<tr class="tdbg" align="center">
-	<td><{$article.id}></td>
-	<td align="left"><{$article.classname}></td>
-	<td align="left">
-		<a target="_blank" href="#"><{$article.title}></a> 
-		<{if $article.top}>[<font color="red">顶</font>]<{/if}></td>
-	<td><{$article.username}></td>
-	<td><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
-	<td>
-		<a href="?c=Article&a=edit&id=<{$article.id}>">修改</a> | 
-		<a href="javascript:void(0)" onClick="confirmDel(<{$article.id}>)">删除</a>
-	</td>
-</tr>
-<{/foreach}>
-<!--文章分页-->
-<tr class="tdbg">
-	<td colspan="7" align="center"><{$pageStr}></td>
-</tr>
-</table>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>编号</th>
+												<th>分类</th>
+												<th>标题</th>
+												<th>作者</th>
+												<th>发布时间</th>
+												<th>操作选项</th>
+											</tr>
+										</thead>
+										<tbody>
+											<{foreach $articles as $article}>
+											<tr class="tdbg" align="center">
+												<td><{$article.id}></td>
+												<td align="left"><{$article.classname}></td>
+												<td align="left">
+													<a target="_blank" href="#"><{$article.title}></a> 
+													<{if $article.top}>[<font color="red">顶</font>]<{/if}></td>
+												<td><{$article.username}></td>
+												<td><{$article.addate|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+												<td>
+													<a href="?c=Article&a=edit&id=<{$article.id}>" onclick="loadContentFrame()">修改</a> | 
+													<a href="javascript:void(0)" onClick="confirmDel(<{$article.id}>)">删除</a>
+												</td>
+											</tr>
+											<{/foreach}>
+											<!--文章分页-->
+											<tr class="tdbg">
+												<td colspan="7" align="center"><{$pageStr}></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+			<script type="text/javascript">
+				//定义删除提示的方法
+				function confirmDel(id)
+				{
+					//询问是否删除
+					if(window.confirm("你确定要删除吗？"))
+					{
+						//首页异步加载数据
+						loadContentFrame("?c=Article&a=delete&id="+id);
+					}
+				}
+			</script>
+		</div>
+		<!-- END MAIN -->
+	</div>
 </body>
+
 </html>

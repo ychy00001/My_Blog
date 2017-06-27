@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+#开启重写机制
+RewriteEngine on
+#重写规则 匹配地址  指向地址
+RewriteRule test.html test.php
+#外部重定向
+#RewriteRule admin.html /admin.php [R]
+#参数匹配
+#RewriteRule ^(.*).html /admin.php?id=$1

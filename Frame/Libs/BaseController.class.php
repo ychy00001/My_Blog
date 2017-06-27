@@ -1,4 +1,11 @@
 <?php 
+/**
+ * ========================
+ * Description  : description
+ * Author       : Rain
+ * ========================
+ */
+
 namespace Frame\Libs;
 use \Frame\Vendor\Smarty;
 
@@ -19,7 +26,6 @@ abstract class BaseController{
 	 * 初始化Smarty 配置Smarty的基本属性
 	 * @Author   Rain
 	 * @DateTime 2017-05-05
-	 * @return   null
 	 */
 	protected function initSmarty(){
 		$smarty = new Smarty();
@@ -43,12 +49,39 @@ abstract class BaseController{
 	 * @param    [String]     $msg  [提示信息]
 	 * @param    [String]     $url  [跳转连接]
 	 * @param    integer    $time [等待秒数]
-	 * @return   null
 	 */
-	protected function jump($msg,$url,$time=2){
-		echo "<h2>$msg</h2>";
-		header("refresh:$time;url=$url");
+	protected function jump($msg,$url,$time=3){
+		$this->smarty->assign(array(
+			'message' => $msg,
+			'time' => $time,
+			'url' => $url,
+			));
+		$this->smarty->display("../Public/jump.html");
 		exit();
+	}
+
+	/**
+	 * 拒绝访问的方法
+	 * @Author   Rain
+	 * @DateTime 2017-05-06
+	 */
+	protected function denyAccess(){
+		if(!isset($_SESSION['username'])){
+			//跳转至登陆界面
+			$this->jump("请登陆!","?c=User&a=login");
+		}
+	}
+
+	/**
+	 * 打印数组方法
+	 * @Author   Rain
+	 * @DateTime 2017-05-07
+	 * @param    [array]     $arr [需要打印的数组]
+	 */
+	protected function printArr($arr){
+		echo "<pre>";
+		print_r($arr);
+		echo "<pre>";
 	}
 }
 

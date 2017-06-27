@@ -1,2 +1,5 @@
 #php:
 .phpintel
+
+#phpstrom:
+.idea

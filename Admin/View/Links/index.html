@@ -1,54 +1,93 @@
-﻿<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<link href="./Public/Admin/Css/public.css" rel="stylesheet" type="text/css" />
-<title>友情链接管理</title>
-<script type="text/javascript">
-//定义删除提示的方法
-function confirmDel(id)
-{
-	//询问是否删除
-	if(window.confirm("你确定要删除吗？"))
-	{
-		//跳转到当前控制器，并传递参数
-		location.href = "?c=Links&a=delete&id="+id;
-	}
-}
-</script>
+	<title>分类管理 | 分类列表</title>
 </head>
 
 <body>
-<table width="100%" border="0" align="center" cellpadding="1" cellspacing="1" class="border">
-	<tr class="topbg"><td>友情链接管理</td></tr>
-	<tr class="tdbg">
-		<td height="30">&nbsp;&nbsp;
-			<a href="?c=Links&a=index">管理首页</a>&nbsp;|&nbsp;
-			<a href="?c=Links&a=add">添加友情链接</a>
-		</td>
-	</tr>
-</table>
-<br />
-<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="border">
-<tr class="title" align="center">
-	<td>编号</td>
-	<td>域名</td>
-	<td>网址</td>
-	<td>排序</td>
-	<td>操作选项</td>
-</tr>
-<{foreach $links as $link}>
-<tr class="tdbg" align="center">
-	<td><{$link.id}></td>
-	<td><{$link.domain}></td>
-	<td><{$link.url}></td>
-	<td><{$link.orderby}></td>
-	<td>
-		<a href="?c=Links&a=edit&id=<{$link.id}>">修改</a> | 
-		<a href="javascript:void(0)" onclick="confirmDel(<{$link.id}>)">删除</a>
-	</td>
-</tr>
-<{/foreach}>
-</table>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">分类管理</h3>
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">分类详情</h3>
+								</div>
+								<div class="panel-body">
+								<form class="form-inline" method="post" action="?c=Links&a=index" onsubmit='loadContentFrame()'>
+									<div class="form-group">
+										<div class="input-group">
+											<input class="form-control" name="keyword" type="text" placeholder="请输入链接关键字"
+											<{if !empty($smarty.request.keyword)}>
+												value="<{$smarty.request.keyword}>"
+											<{/if}>
+											>
+											<span class="input-group-btn" ><input type="submit" class="btn btn-primary" type="button" value="Go!"></span>
+										</div>
+									</div>
+									</form>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>编号</th>
+												<th>域名</th>
+												<th>网址</th>
+												<th>排序</th>
+												<th>操作选项</th>
+											</tr>
+										</thead>
+										<tbody>
+											<{foreach $links as $link}>
+											<tr class="tdbg" align="center">
+												<td><{$link.id}></td>
+												<td><{$link.domain}></td>
+												<td><{$link.url}></td>
+												<td><{$link.orderby}></td>
+												<td>
+													<a href="?c=Links&a=edit&id=<{$link.id}>"
+													onClick="loadContentFrame()">修改</a> | 
+													<a href="javascript:void(0)" onclick="confirmDel(<{$link.id}>)">删除</a>
+												</td>
+											</tr>
+											<{/foreach}>
+											<!--连接分页-->
+											<tr class="tdbg">
+												<td colspan="7" align="center"><{$pageStr}></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+			<script type="text/javascript">
+				//定义删除提示的方法
+				function confirmDel(id)
+				{
+					//询问是否删除
+					if(window.confirm("你确定要删除吗？"))
+					{
+						//首页异步加载数据
+						loadContentFrame("?c=Links&a=delete&id="+id);
+					}
+				}
+			</script>
+		</div>
+		<!-- END MAIN -->
+	</div>
 </body>
+
 </html>

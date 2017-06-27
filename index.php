@@ -9,4 +9,3 @@ define("APP_PATH",ROOT_PATH.APP.DS);
 require_once(ROOT_PATH."Frame".DS."Frame.class.php");
 
 \Frame\Frame::run();
- ?>

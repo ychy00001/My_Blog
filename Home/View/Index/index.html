@@ -1,10 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>远方小镇</title>
+<link rel="stylesheet" type="text/css" media="all" href="./Public/Home/Css/style.css" />
+<!-- 自适应页面 -->
+<link rel="stylesheet" type="text/css" href="./Public/Home/Css/media-queries.css" />
+
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="style/css/ie8.css" media="all" />
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="style/css/ie9.css" media="all" />
+<![endif]-->
+<script type="text/javascript" src="./Public/Home/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/selectnav.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.backstretch.min.js"></script>
+<script type="text/javascript" src="./Public/Home/Js/jquery.dcflickr.1.0.js"></script>
+
 </head>
-<body bgcolor="#0000FF">
-	前台
+<body>
+<div class="scanlines"></div>
+
+<!-- Begin Header -->
+<div class="header-wrapper opacity">
+	<div class="header">
+		<!-- Begin Logo -->
+		<div class="logo">
+		    <a href="index.html">
+				<img src="./Public/Home/Images/logo.png" alt="" />
+			</a>
+	    </div>
+		<!-- End Logo -->
+		<!-- Begin Menu -->
+		<div id="menu-wrapper">
+			<div id="menu" class="menu">
+				<ul id="tiny">
+					<li class="active"><a href="?c=Index">首页</a>
+						<!-- <ul>
+							<li><a href="?c=Index">首页</a></li>
+							<li><a href="#">推荐</a></li>
+						</ul> -->
+					</li>
+					<li><a href="?c=Index&a=showList">博文列表</a></li>
+					<li><a href="#">联系我</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- End Menu -->
+	</div>
+</div>
+<!-- End Header -->
+
+<!-- Begin Wrapper -->
+<div class="wrapper"><!-- Begin Intro -->
+<div class="intro">让你害怕的不是未知的未来，而是不断重复着过去的错误。<br>
+—《源代码》</div>
+<ul class="social">
+	<li>
+		<a class="rss" href="#"></a>
+	</li>
+	<li>
+		<a class="facebook" href="#"></a>
+	</li>
+	<li>
+		<a class="twitter" href="#"></a>
+	</li>
+	<li>
+		<a class="pinterest" href="#"></a>
+	</li>
+	<li>
+		<a class="dribbble" href="#"></a>
+	</li>
+	<li>
+		<a class="flickr" href="#"></a>
+	</li>
+	<li>
+		<a class="linkedin" href="#"></a>
+	</li>
+</ul><!-- End Intro --> 
+
+<!-- Begin Blog Grid -->
+<div class="blog-wrap">
+	<!-- Begin Blog -->
+	<div class="blog-grid">
+		<{foreach $articles as $article}>
+			<!-- Begin Image Format -->
+			<div class="post format-image box"> 
+				<!-- 如果有图片标题 显示图片 -->
+
+				<{if isset($article.image_title) && !empty($article.image_title)}>
+					<div class="frame">
+						<a href="?c=Index&a=content&id=<{$article.id}>">
+							<img src="<{$article.image_title}>" alt="" />
+						</a>
+					</div>
+				<{/if}>
+				<h2 class="title">
+					<a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title}></a>
+				</h2>
+				<div class="post_content" name="content<{$article.id}>">
+					<{$article.content}>
+				</div>
+				<script type="text/javascript">
+					// 根据后台给出的高度 设置
+					$("[name='content<{$article.id}>']").height(<{$article.height}>);
+				</script>
+				<!-- <{strip_tags($article.content)|truncate:1500:"..."}> -->
+				<div class="details">
+					<span class="icon-standard"><a href="#"><{$article['addate']|date_format:'%Y-%m-%d %H:%M:%S'}></a></span>
+					<span class="likes"><a href="?c=Index&a=praise&id=<{$article['id']}>&addr=<{$smarty.server.SERVER_ADDR}>" class="likeThis" onclick="addPraise()"><{$article.praise}></a></span>
+					<span class="comments"><a href="#"><{$article.comment_count}></a></span>
+				</div>
+			</div>
+			<!-- End Image Format -->
+		<{/foreach}>		
+ 	</div>
+	<!-- End Blog -->
+</div>
+<!-- End Blog Grid -->
+
+<!-- Begin Page-nav -->
+    <div id="navigation">
+    	<div class="nav-previous"><span class='meta-nav-prev'><{$pageMsgArr['pagePrevStr']}></span></div>
+    	<div class="nav-msg"><span class='meta-nav-msg'><{$pageMsgArr['pageMsgStr']}></span></div>
+    	<div class="nav-next"><span class='meta-nav-next'><{$pageMsgArr['pageNextStr']}></span> </div>
+    </div>
+    <!-- End Page-nav -->
+
+</div>
+<!-- End Wrapper -->
+
+<!-- Begin Footer -->
+<div class="footer-wrapper">
+<div id="footer" class="four">
+		<div id="first" class="widget-area">
+			<div class="widget widget_search">
+				<h3 class="widget-title">文章搜索</h3>
+				<form class="searchform" method="get" action="?c=Index&a=showList">
+					<input type="hidden" name="c" value="Index">
+					<input type="hidden" name="a" value="showList">
+					<input type="text" name="title" value="请输入文章标题关键字" onFocus="this.value=''" onBlur="this.value='请输入文章标题关键字'"/>
+				</form>
+			</div>
+			
+		</div><!-- #first .widget-area -->
+		
+		<div id="second" class="widget-area">
+			<div class="widget widget_archive">
+				<h3 class="widget-title">年份归档</h3>
+				<ul>
+					<{foreach $datas as $data}>
+						<li>
+							<a href="?c=Index&a=index&date=<{$data.months}>"><{$data.months}></a>
+							(<span><{$data.article_count}></span>)
+						</li>
+					<{/foreach}>
+				</ul>
+			</div>	
+		</div><!-- #second .widget-area -->
+
+		<div id="third" class="widget-area">
+		<div id="example-widget-3" class="widget example">
+			<h3 class="widget-title">热门博文</h3>
+			<ul class="post-list">
+			  	<li> 
+			  		<!-- <div class="frame">
+			  			<a href="#"><img src="./Public/Home/Images/art/s1.jpg" /></a>
+			  		</div> -->
+					<div class="meta">
+					    <h6><a href="#">Charming Winter</a></h6>
+					    <em>28th Sep 2012</em>
+				    </div>
+				</li>
+				<li> 
+			  	<!-- 	<div class="frame">
+			  			<a href="#"><img src="./Public/Home/Images/art/s2.jpg" /></a>
+			  		</div> -->
+					<div class="meta">
+					    <h6><a href="#">Trickling Stream</a></h6>
+					    <em>5th Sep 2012</em>
+				    </div>
+				</li>
+				<li> 
+			  		<!-- <div class="frame">
+			  			<a href="#"><img src="./Public/Home/Images/art/s3.jpg" /></a>
+			  		</div> -->
+					<div class="meta">
+					    <h6><a href="#">Morning Glory</a></h6>
+					    <em>26th Sep 2012</em>
+				    </div>
+				</li>
+			</ul>
+			
+		</div>
+		</div><!-- #third .widget-area -->
+
+		<div id="fourth" class="widget-area">
+		<div class="widget">
+			<h3 class="widget-title">友情连接</h3>
+			<ul class="flickr-feed">
+				<{foreach $links as $link}>
+				<li><a href="<{$link.url}>" target="_black"><{$link.domain}></a></li>
+				<{/foreach}>
+			</ul>
+		</div>
+		</div><!-- #fourth .widget-area -->
+	</div>
+</div>
+<div class="site-generator-wrapper">
+	<div class="site-generator">京ICP备17029279号 &copy; Copyright 2017-2018 ychy0001.xin All rights reserved</div>
+</div>
+<!-- End Footer --> 
+<script type="text/javascript" src="./Public/Home/Js/scripts.js"></script>
+<script type="text/javascript">
+	$('ul,li,ol,span').css('color','#B9B9B9');
+	$.backstretch("./Public/Home/Images/bg/1.jpg");
+</script>
 </body>
 </html>

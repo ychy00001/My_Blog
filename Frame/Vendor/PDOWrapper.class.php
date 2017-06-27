@@ -1,14 +1,15 @@
 <?php 
-namespace Frame\Vendor;
-use \PDO;
-use \PDOException;
-
 /**
  * ========================
  * Description  : POD封装类
  * Author       : Rain
  * ========================
  */
+
+namespace Frame\Vendor;
+use \PDO;
+use \PDOException;
+
 final class PDOWrapper{
 	//数据库配置信息
 	private $db_type;
@@ -51,7 +52,7 @@ final class PDOWrapper{
 			$dsn .= "dbname={$this->db_name};charset={$this->charset}";
 			$this->pdo = new PDO($dsn,$this->db_user,$this->db_pass);
 		} catch (PDOException $e) {
-			$this->printError("PDO对象创建失败");
+			$this->printError($e);
 		}
 	}
 
@@ -75,7 +76,7 @@ final class PDOWrapper{
 		try {
 			return $this->pdo->exec($sql);
 		} catch (Exception $e) {
-			$this->printError("SQL语句错误");
+			$this->printError($e);
 		}
 	}
 
@@ -91,7 +92,7 @@ final class PDOWrapper{
 			$PDOStatment = $this->pdo->query($sql);
 			return $PDOStatment->fetch(PDO::FETCH_ASSOC);
 		} catch (PDOException $e) {
-			$this->printError("SQL语句错误");
+			$this->printError($e);
 		}
 	}
 
@@ -107,7 +108,7 @@ final class PDOWrapper{
 			$PDOStatment = $this->pdo->query($sql);
 			return $PDOStatment->fetchAll(PDO::FETCH_ASSOC);
 		} catch (PDOException $e) {
-			$this->printError("SQL语句错误");
+			$this->printError($e);
 		}
 	}
 
@@ -123,8 +124,18 @@ final class PDOWrapper{
 			$PDOStatment = $this->pdo->query($sql);
 			return $PDOStatment->rowCount();
 		} catch (PDOException $e) {
-			$this->printError("SQL语句错误");
+			$this->printError($e);
 		}
+	}
+
+	//错误处理方法
+	private function printError($e){
+		echo "<h2>SQL语句出错！</h2>";
+		echo "错误编号：".$e->getCode();
+		echo "<br />错误行号：".$e->getLine();
+		echo "<br />错误文件：".$e->getFile();
+		echo "<br />错误信息：".$e->getMessage();
+		exit();
 	}
 }
 
