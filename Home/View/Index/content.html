@@ -151,7 +151,7 @@
                             <img alt="头像" src='./Public/Home/Images/head.png' class='avatar avatar-70 photo' height='70' width='70' />
                         </div>
                         <div class="message">
-                            <span class="reply-link"><a class="comment-reply-link" href="javascript:void(0)" onclick="document.comment.pid.value=<{$comment.id}>">回复</a></span>
+                           <!--  <span class="reply-link"><a class="comment-reply-link" href="javascript:void(0)" onclick="document.comment.pid.value=<{$comment.id}>">回复</a></span> -->
                             <div class="info">
                                 <h2><{$comment.username}></h2>
                                 <span class="meta"><{$comment.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
@@ -172,7 +172,7 @@
                                 <div class="comment-author vcard user frame">
                                     <img alt='' src='./Public/Home/Images/head.png' class='avatar avatar-70 photo' height='70' width='70' />           </div><!-- .comment-author .vcard -->
                                 <div class="message">
-                                    <span class="reply-link"><a class='comment-reply-link' href='/obscura-wp/morning-glory/?replytocom=5#respond' onclick='return addComment.moveForm("comment-5", "5", "respond", "16")'>回复</a></span>
+                                    <!-- <span class="reply-link"><a class='comment-reply-link' href='/obscura-wp/morning-glory/?replytocom=5#respond' onclick='return addComment.moveForm("comment-5", "5", "respond", "16")'>回复</a></span> -->
                                     <div class="info">
                                         <h2><{$son.username}></h2> 
                                          <span class="meta"><{$son.addate|date_format:'%Y-%m-%d %H:%M:%S'}></span>
@@ -208,7 +208,7 @@
                     </p>
                     <p class="comment-form-comment">
                         <label for="comment">评论</label>
-                        <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                        <textarea id="comment" name="content" cols="45" rows="8" aria-required="true"></textarea>
                     </p>
                     <input type="hidden" name="article_id" value="<{$article.id}>">
                     <input type="hidden" name="pid" value="0">

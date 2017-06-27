@@ -86,6 +86,18 @@ final class ArticleModel extends BaseModel{
 		$sql = "UPDATE {$this->table} SET praise=praise+1 where id = {$id}";
 		return $this->pdo->exec($sql);
 	}
+
+	/**
+	 * 更新评论数
+	 * @Author   Rain
+	 * @DateTime 2017-05-08
+	 * @param    [integer]     $id [文章id]
+	 * @return   [boolean]         [执行结果]
+	 */
+	public function updateCommentCount($id){
+		$sql = "UPDATE {$this->table} SET comment_count=comment_count+1 where id = {$id}";
+		return $this->pdo->exec($sql);
+	}
 }
 
  ?>

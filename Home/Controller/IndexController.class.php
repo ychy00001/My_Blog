@@ -14,6 +14,7 @@ use \Home\Model\CategoryModel;
 use \Home\Model\ArticleModel;
 use \Home\Model\CommentModel;
 use \Frame\Vendor\Pager;
+use \Home\Model\UserModel;
 
 class IndexController extends BaseController{
 	/**
@@ -239,5 +240,32 @@ class IndexController extends BaseController{
 		}
 	}
 
-
+	//添加评论
+	public function send(){
+		//获取表单数据
+		$data['article_id']	= $_POST['article_id'];
+		$data['pid']		= $_POST['pid'];
+		$data['content']	= $_POST['content'];
+		$data['addate']		= time();
+		// $data['user_id']	= $_SESSION['uid'];
+		$use_data['username']	= $_POST['author'];
+		$use_data['addate'] = time();
+		//创建user用户
+		$res = UserModel::getInstance()->insert($use_data);
+		if($res){
+			//获取插入的UserId
+			$author = $_POST['author'];
+			$author_user = UserModel::getInstance()->getIdByName($author);
+			$data['user_id'] = $author_user['id'];
+			//写入评论数据
+			CommentModel::getInstance()->insert($data);
+			//文章评论数加1
+			ArticleModel::getInstance()->updateCommentCount($data['article_id']);
+			//网页跳转
+			$this->jump("评论发布成功！","?c=Index&a=content&id=".$data['article_id']);
+		}else{
+			$this->jump("用户创建失败","?c=Index&a=content&id=".$data['article_id']);
+		}
+		
+	}
 }
