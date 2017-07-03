@@ -58,24 +58,28 @@ function loadContentFrame(event) {
 			var sub_flag = actionUrl.indexOf("?");
 			//截取字符串 获取?action=xx&controll=xxx ?c=Article&a=insert
 			param.url = actionUrl.substr(sub_flag,actionUrl.length);
-			if($obj[0].length > 1){
-				//循环添加url的参数
-				for(var i=0;i<$obj[0].length-1;i++){
-					//checkbox需要判断一下
-					if($obj[0][i].name == 'top' || $obj[0][i].name == 'status'){
-						if($obj[0][i].checked == true){
-							param.data += $obj[0][i].name;
-							param.data += "=" + 1 +"&";
-						}
-						continue;
-					}else{
-						param.data += $obj[0][i].name;
-						param.data += "=" + $obj[0][i].value +"&";
-					}
-				}
-				//category_id=1&title=testtest&orderby=50&top=0&=&content=&=添加
-				param.data = param.data.substr(0,param.data.length-1);
-			}
+			//获取数据
+			param.data += $obj.serialize();
+
+			//一下数据作为保留 以后如果出错使用
+			// if($obj[0].length > 1){
+			// 	//循环添加url的参数
+			// 	for(var i=0;i<$obj[0].length-1;i++){
+			// 		//checkbox需要判断一下
+			// 		if($obj[0][i].name == 'top' || $obj[0][i].name == 'status'){
+			// 			if($obj[0][i].checked == true){
+			// 				param.data += $obj[0][i].name;
+			// 				param.data += "=" + 1 +"&";
+			// 			}
+			// 			continue;
+			// 		}else{
+			// 			param.data += $obj[0][i].name;
+			// 			param.data += "=" + $obj[0][i].value +"&";
+			// 		}
+			// 	}
+			// 	//category_id=1&title=testtest&orderby=50&top=0&=&content=&=添加
+			// 	param.data = param.data.substr(0,param.data.length-1);
+			// }
 		}
 	}
 	//请求网络
@@ -102,7 +106,10 @@ function initKindEditor(){
 	$.getScript('./Public/Admin/Js/editor/kindeditor-min.js', function() {
 		$.getScript('./Public/Admin/Js/editor/lang/zh_CN.js', function() {
 			KindEditor.basePath = './Public/Admin/Js/editor/';
-			KindEditor.create('textarea[name="content"]');
+			KindEditor.create('textarea[name="content"]', {
+				allowFileManager : true,
+				afterBlur: function(){this.sync();}
+			});
 		});
 	});
 }	
