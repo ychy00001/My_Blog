@@ -27,8 +27,10 @@ class IndexController extends BaseController{
 		$links = LinksModel::getInstance()->fetchAll();
 		//无限级文章分类模块
 		$categorys = CategoryModel::getInstance()->categoryList(CategoryModel::getInstance()->fetchAllWithJoin());
-		//获取文档那月归档
+		//获取文档年月月归档
 		$datas = ArticleModel::getInstance()->fetchAllWithJoinAndCount();
+		//获取推荐文章
+		$recommends = ArticleModel::getInstance()->fetchRecommArticle(); 
 
 		//构建查询条件
 		$where = "2>1";
@@ -94,6 +96,7 @@ class IndexController extends BaseController{
 			'categorys' => $categorys,
 			'datas' => $datas,
 			'articles' => $articles,
+			'recommends' => $recommends,
 			'pageStr' => $pageStr,
 			'pageMsgArr' => $pageMsgArr,
 			));
@@ -113,7 +116,8 @@ class IndexController extends BaseController{
 		$categorys = CategoryModel::getInstance()->categoryList(CategoryModel::getInstance()->fetchAllWithJoin());
 		//获取文档那月归档
 		$datas = ArticleModel::getInstance()->fetchAllWithJoinAndCount();
-
+		//获取推荐文章
+		$recommends = ArticleModel::getInstance()->fetchRecommArticle(); 
 
 		//构建查询条件
 		$where = "2>1";
@@ -158,6 +162,7 @@ class IndexController extends BaseController{
 		$this->smarty->assign(array(
 			'links' => $links,
 			'categorys' => $categorys,
+			'recommends' => $recommends,
 			'datas' => $datas,
 			'articles' => $articles,
 			'pageStr' => $pageStr,
@@ -180,6 +185,8 @@ class IndexController extends BaseController{
 		$categorys = CategoryModel::getInstance()->categoryList(CategoryModel::getInstance()->fetchAllWithJoin());
 		//获取文档那月归档
 		$datas = ArticleModel::getInstance()->fetchAllWithJoinAndCount();
+		//获取推荐文章
+		$recommends = ArticleModel::getInstance()->fetchRecommArticle(); 
 		$id = $_GET['id'];
 		$article = ArticleModel::getInstance()->fetchOneWithJoin($id);
 
@@ -203,6 +210,7 @@ class IndexController extends BaseController{
 			'article'   => $article,
 			'links'     => $links,
 			'categorys' => $categorys,
+			'recommends' => $recommends,
 			'datas'     => $datas,
 			'prevNext'  => $prevNext,
 			'pageArr'	=> $pageArr,

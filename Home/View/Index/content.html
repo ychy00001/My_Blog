@@ -233,33 +233,22 @@
     <div class="sidebox widget">
         <h3 class="widget-title">Popular Posts</h3>
         <ul class="post-list">
-            <li>
+            <{foreach $recommends as $article}>
+            <li> 
+                <{if isset($article.image_title) && !empty($article.image_title)}>
                 <div class="frame">
-                    <!-- <a href="#"><img src="style/images/art/s1.jpg"/></a> -->
+                    <a href="?c=Index&a=content&id=<{$article.id}>">
+                        <img src="<{$article.image_title}>" alt="" />
+                    </a>
                 </div>
+                <{/if}>
+
                 <div class="meta">
-                    <h6><a href="#">Charming Winter</a></h6>
-                    <em>28th Sep 2012</em>
+                    <h6><a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title|truncate:15:"..."}></a></h6>
+                    <em><{$article['addate']|date_format:'%Y-%m-%d %H:%M:%S'}></em>
                 </div>
             </li>
-            <li>
-                <div class="frame">
-                    <!-- <a href="#"><img src="style/images/art/s2.jpg"/></a> -->
-                </div>
-                <div class="meta">
-                    <h6><a href="#">Trickling Stream</a></h6>
-                    <em>5th Sep 2012</em>
-                </div>
-            </li>
-            <li>
-                <div class="frame">
-                    <!-- <a href="#"><img src="style/images/art/s3.jpg"/></a> -->
-                </div>
-                <div class="meta">
-                    <h6><a href="#">Morning Glory</a></h6>
-                    <em>26th Sep 2012</em>
-                </div>
-            </li>
+            <{/foreach}>
         </ul>
 
     </div>
@@ -322,33 +311,22 @@
             <div id="example-widget-3" class="widget example">
                 <h3 class="widget-title">热门博文</h3>
                 <ul class="post-list">
-                    <li>
-                        <!-- <div class="frame">
-                            <a href="#"><img src="./Public/Home/Images/art/s1.jpg" /></a>
-                        </div> -->
+                    <{foreach $recommends as $article}>
+                    <li> 
+                        <{if isset($article.image_title) && !empty($article.image_title)}>
+                        <div class="frame">
+                            <a href="?c=Index&a=content&id=<{$article.id}>">
+                                <img src="<{$article.image_title}>" alt="" />
+                            </a>
+                        </div>
+                        <{/if}>
+
                         <div class="meta">
-                            <h6><a href="#">Charming Winter</a></h6>
-                            <em>28th Sep 2012</em>
+                            <h6><a href="?c=Index&a=content&id=<{$article.id}>"><{$article.title|truncate:15:"..."}></a></h6>
+                            <em><{$article['addate']|date_format:'%Y-%m-%d %H:%M:%S'}></em>
                         </div>
                     </li>
-                    <li>
-                        <!-- 	<div class="frame">
-                                <a href="#"><img src="./Public/Home/Images/art/s2.jpg" /></a>
-                            </div> -->
-                        <div class="meta">
-                            <h6><a href="#">Trickling Stream</a></h6>
-                            <em>5th Sep 2012</em>
-                        </div>
-                    </li>
-                    <li>
-                        <!-- <div class="frame">
-                            <a href="#"><img src="./Public/Home/Images/art/s3.jpg" /></a>
-                        </div> -->
-                        <div class="meta">
-                            <h6><a href="#">Morning Glory</a></h6>
-                            <em>26th Sep 2012</em>
-                        </div>
-                    </li>
+                    <{/foreach}>
                 </ul>
 
             </div>

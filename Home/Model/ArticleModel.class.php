@@ -49,6 +49,19 @@ final class ArticleModel extends BaseModel{
 	}
 
 	/**
+	 * 获取点赞 并且评论数最多的三条数据
+	 * @Author   Rain
+	 * @DateTime 2017-07-11
+	 */
+	public function fetchRecommArticle(){
+		// select * from article order by `read` desc,praise desc limit 3;
+		$sql = "SELECT * from $this->table ";
+		$sql .= " ORDER BY 'read' DESC,praise DESC ";
+		$sql .= " limit 3";
+		return $this->pdo->fetchAll($sql);
+	}
+
+	/**
 	 * 获取指定id连表查询的数据 (查询一篇文章)
 	 * @Author   Rain
 	 * @DateTime 2017-05-08
@@ -98,6 +111,8 @@ final class ArticleModel extends BaseModel{
 		$sql = "UPDATE {$this->table} SET comment_count=comment_count+1 where id = {$id}";
 		return $this->pdo->exec($sql);
 	}
+
+
 }
 
  ?>
