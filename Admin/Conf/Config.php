@@ -8,12 +8,12 @@
 return array(
 	//数据库配置
 	'db_type' => 'mysql',
-	'db_host' => 'localhost',
+	'db_host' => '39.106.24.161',
 	'db_port' => '3306',
 	'db_user' => 'ychy',
 	'db_pass' => '515618',
 	'db_name' => 'blog',
-	'charset' => 'utf8',
+	'charset' => 'utf8mb4',
 
 	//默认配置
 	'default_platform'   => 'Admin',

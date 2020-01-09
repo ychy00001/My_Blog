@@ -52,7 +52,8 @@ final class PDOWrapper{
 			$dsn .= "dbname={$this->db_name};charset={$this->charset}";
 			$this->pdo = new PDO($dsn,$this->db_user,$this->db_pass);
 		} catch (PDOException $e) {
-			$this->printError($e);
+throw $e;exit();
+	//		$this->printError($e);
 		}
 	}
 
